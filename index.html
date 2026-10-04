@@ -1,1 +1,2538 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Producción</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #f1f1f1;
+        }
+
+        header {
+            background: #1c1c1c;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            min-height: 75px;
+            background: #1e1e1e;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .menu button.activo {
+            background: #383838;
+            border-color: #666;
+        }
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        .seccion {
+            display: none;
+        }
+
+        .seccion.activa {
+            display: block;
+        }
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        .form {
+            display: grid;
+            gap: 12px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid #444;
+            font-size: 16px;
+        }
+
+        input,
+        select {
+            background: #292929;
+            color: white;
+        }
+
+        button {
+            background: #3a3a3a;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .boton-cancelar {
+            background: #555;
+        }
+
+        /* =========================
+           INSUMOS
+        ========================= */
+
+        .insumo {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .insumo-nombre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .insumo-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .boton-modificar {
+            background: #555;
+        }
+
+        .boton-eliminar {
+            background: #702020;
+        }
+
+        /* =========================
+           COMPRAS
+        ========================= */
+
+        .compra {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .compra-nombre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .compra-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        /* =========================
+           RECETAS
+        ========================= */
+
+        .ingrediente {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .ingrediente-nombre {
+            font-weight: bold;
+        }
+
+        .ingrediente-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .receta {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .receta-nombre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .receta-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .costo-receta {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #444;
+        }
+
+        /* =========================
+           VACIO
+        ========================= */
+
+        .vacio {
+            color: #888;
+            text-align: center;
+            padding: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+        <h1>Producción</h1>
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             MENU PRINCIPAL
+        ========================= -->
+
+        <div class="menu">
+
+            <button
+                id="botonInsumos"
+                class="activo"
+                onclick="mostrarSeccion('insumos', this)"
+            >
+                Insumos
+            </button>
+
+            <button
+                onclick="mostrarSeccion('compras', this)"
+            >
+                Compras
+            </button>
+
+            <button
+                onclick="mostrarSeccion('recetas', this)"
+            >
+                Recetas
+            </button>
+
+            <button
+                onclick="mostrarSeccion('productos', this)"
+            >
+                Productos
+            </button>
+
+            <button
+                onclick="mostrarSeccion('produccion', this)"
+            >
+                Producción
+            </button>
+
+            <button
+                onclick="mostrarSeccion('ventas', this)"
+            >
+                Ventas
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             INSUMOS
+        ========================= -->
+
+        <section
+            id="seccion-insumos"
+            class="seccion activa"
+        >
+
+            <div class="card">
+
+                <h2 id="tituloFormulario">
+                    Nuevo insumo
+                </h2>
+
+                <div class="form">
+
+                    <input
+                        id="nombre"
+                        type="text"
+                        placeholder="Nombre del insumo"
+                    >
+
+                    <select id="unidad">
+
+                        <option value="kg">
+                            Kilogramo (kg)
+                        </option>
+
+                        <option value="g">
+                            Gramo (g)
+                        </option>
+
+                        <option value="litro">
+                            Litro (L)
+                        </option>
+
+                        <option value="ml">
+                            Mililitro (ml)
+                        </option>
+
+                        <option value="unidad">
+                            Unidad
+                        </option>
+
+                    </select>
+
+                    <input
+                        id="stock"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Stock"
+                    >
+
+                    <input
+                        id="costo"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Costo por unidad"
+                    >
+
+                    <button
+                        id="botonGuardar"
+                        type="button"
+                        onclick="crearInsumo()"
+                    >
+                        Agregar insumo
+                    </button>
+
+                    <button
+                        id="botonCancelar"
+                        type="button"
+                        class="boton-cancelar"
+                        onclick="cancelarEdicion()"
+                        style="display:none;"
+                    >
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Insumos
+                </h2>
+
+                <div id="listaInsumos">
+
+                    <div class="vacio">
+                        Todavía no hay insumos
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COMPRAS
+        ========================= -->
+
+        <section
+            id="seccion-compras"
+            class="seccion"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Nueva compra
+                </h2>
+
+                <div class="form">
+
+                    <select
+                        id="compraInsumo"
+                        onchange="actualizarUnidadesCompra()"
+                    >
+
+                        <option value="">
+                            Seleccionar insumo
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        id="compraCantidad"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Cantidad comprada"
+                    >
+
+
+                    <select id="compraUnidad">
+                    </select>
+
+
+                    <input
+                        id="compraPrecio"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Precio total de la compra"
+                    >
+
+
+                    <button
+                        type="button"
+                        onclick="registrarCompra()"
+                    >
+                        Registrar compra
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Historial de compras
+                </h2>
+
+                <div id="listaCompras">
+
+                    <div class="vacio">
+                        Todavía no hay compras
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RECETAS
+        ========================= -->
+
+        <section
+            id="seccion-recetas"
+            class="seccion"
+        >
+
+            <div class="card">
+
+                <h2 id="tituloFormularioReceta">
+                    Nueva receta
+                </h2>
+
+                <div class="form">
+
+                    <input
+                        id="nombreReceta"
+                        type="text"
+                        placeholder="Nombre de la receta"
+                    >
+
+                    <input
+                        id="rendimientoReceta"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Rendimiento"
+                    >
+
+                    <select
+                        id="ingredienteInsumo"
+                        onchange="actualizarUnidadesIngrediente()"
+                    >
+
+                        <option value="">
+                            Seleccionar insumo
+                        </option>
+
+                    </select>
+
+                    <input
+                        id="ingredienteCantidad"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Cantidad"
+                    >
+
+                    <select id="ingredienteUnidad">
+                    </select>
+
+                    <button
+                        type="button"
+                        onclick="agregarIngrediente()"
+                    >
+                        Agregar ingrediente
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Ingredientes
+                </h2>
+
+                <div id="listaIngredientesReceta">
+
+                    <div class="vacio">
+                        Todavía no hay ingredientes
+                    </div>
+
+                </div>
+
+                <div id="costoFormularioReceta">
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <button
+                    id="botonGuardarReceta"
+                    type="button"
+                    onclick="crearReceta()"
+                >
+                    Crear receta
+                </button>
+
+                <button
+                    id="botonCancelarReceta"
+                    type="button"
+                    class="boton-cancelar"
+                    onclick="cancelarEdicionReceta()"
+                    style="display:none;"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>
+                    Recetas
+                </h2>
+
+                <div id="listaRecetas">
+
+                    <div class="vacio">
+                        Todavía no hay recetas
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCTOS
+        ========================= -->
+
+        <section
+            id="seccion-productos"
+            class="seccion"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Productos
+                </h2>
+
+                <div class="vacio">
+                    Próximamente
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCCIÓN
+        ========================= -->
+
+        <section
+            id="seccion-produccion"
+            class="seccion"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Producción
+                </h2>
+
+                <div class="vacio">
+                    Próximamente
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             VENTAS
+        ========================= -->
+
+        <section
+            id="seccion-ventas"
+            class="seccion"
+        >
+
+            <div class="card">
+
+                <h2>
+                    Ventas
+                </h2>
+
+                <div class="vacio">
+                    Próximamente
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           DATOS
+        ========================= */
+
+        var insumos = [];
+
+        var compras = [];
+
+        var recetas = [];
+
+        var insumoEditando = null;
+
+        var recetaEditando = null;
+
+        var ingredientesReceta = [];
+
+
+        /* =========================
+           CAMBIAR SECCIÓN
+        ========================= */
+
+        function mostrarSeccion(nombre, boton) {
+
+            var secciones =
+                document.getElementsByClassName("seccion");
+
+
+            for (var i = 0; i < secciones.length; i++) {
+
+                secciones[i].classList.remove("activa");
+
+            }
+
+
+            var botones =
+                document.querySelectorAll(".menu button");
+
+
+            for (var i = 0; i < botones.length; i++) {
+
+                botones[i].classList.remove("activo");
+
+            }
+
+
+            document
+                .getElementById("seccion-" + nombre)
+                .classList.add("activa");
+
+
+            boton.classList.add("activo");
+
+
+            if (nombre === "recetas") {
+
+                actualizarIngredientesDisponibles();
+
+                actualizarUnidadesIngrediente();
+
+                mostrarIngredientesReceta();
+
+                mostrarRecetas();
+
+            }
+
+        }
+
+
+        /* =========================
+           CREAR INSUMO
+        ========================= */
+
+        function crearInsumo() {
+
+            var nombre =
+                document.getElementById("nombre").value.trim();
+
+            var unidad =
+                document.getElementById("unidad").value;
+
+            var stock =
+                document.getElementById("stock").value;
+
+            var costo =
+                document.getElementById("costo").value;
+
+
+            if (nombre === "") {
+
+                alert("Ingresá un nombre");
+
+                return;
+
+            }
+
+
+            if (stock === "") {
+
+                alert("Ingresá el stock");
+
+                return;
+
+            }
+
+
+            if (costo === "") {
+
+                alert("Ingresá el costo");
+
+                return;
+
+            }
+
+
+            var insumo = {
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                unidad: unidad,
+
+                stock: Number(stock),
+
+                costo: Number(costo)
+
+            };
+
+
+            insumos.push(insumo);
+
+
+            limpiarFormulario();
+
+            mostrarInsumos();
+
+            actualizarListaCompras();
+
+            actualizarIngredientesDisponibles();
+
+        }
+
+
+        /* =========================
+           MODIFICAR INSUMO
+        ========================= */
+
+        function modificarInsumo(id) {
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    var insumo = insumos[i];
+
+
+                    document.getElementById("nombre").value =
+                        insumo.nombre;
+
+                    document.getElementById("unidad").value =
+                        insumo.unidad;
+
+                    document.getElementById("stock").value =
+                        insumo.stock;
+
+                    document.getElementById("costo").value =
+                        insumo.costo;
+
+
+                    insumoEditando = id;
+
+
+                    document.getElementById("tituloFormulario").innerText =
+                        "Modificar insumo";
+
+
+                    document.getElementById("botonGuardar").innerText =
+                        "Guardar cambios";
+
+
+                    document.getElementById("botonGuardar").onclick =
+                        function () {
+                            guardarCambios();
+                        };
+
+
+                    document.getElementById("botonCancelar").style.display =
+                        "block";
+
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+        /* =========================
+           GUARDAR CAMBIOS INSUMO
+        ========================= */
+
+        function guardarCambios() {
+
+            var nombre =
+                document.getElementById("nombre").value.trim();
+
+            var unidad =
+                document.getElementById("unidad").value;
+
+            var stock =
+                document.getElementById("stock").value;
+
+            var costo =
+                document.getElementById("costo").value;
+
+
+            if (nombre === "") {
+
+                alert("Ingresá un nombre");
+
+                return;
+
+            }
+
+
+            if (stock === "") {
+
+                alert("Ingresá el stock");
+
+                return;
+
+            }
+
+
+            if (costo === "") {
+
+                alert("Ingresá el costo");
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === insumoEditando) {
+
+                    insumos[i].nombre = nombre;
+
+                    insumos[i].unidad = unidad;
+
+                    insumos[i].stock = Number(stock);
+
+                    insumos[i].costo = Number(costo);
+
+                    break;
+
+                }
+
+            }
+
+
+            cancelarEdicion();
+
+            mostrarInsumos();
+
+            actualizarListaCompras();
+
+            actualizarIngredientesDisponibles();
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           ELIMINAR INSUMO
+        ========================= */
+
+        function eliminarInsumo(id) {
+
+            var confirmar =
+                confirm("¿Querés eliminar este insumo?");
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    insumos.splice(i, 1);
+
+                    break;
+
+                }
+
+            }
+
+
+            mostrarInsumos();
+
+            actualizarListaCompras();
+
+            actualizarIngredientesDisponibles();
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           CANCELAR EDICIÓN INSUMO
+        ========================= */
+
+        function cancelarEdicion() {
+
+            insumoEditando = null;
+
+            limpiarFormulario();
+
+
+            document.getElementById("tituloFormulario").innerText =
+                "Nuevo insumo";
+
+
+            document.getElementById("botonGuardar").innerText =
+                "Agregar insumo";
+
+
+            document.getElementById("botonGuardar").onclick =
+                function () {
+                    crearInsumo();
+                };
+
+
+            document.getElementById("botonCancelar").style.display =
+                "none";
+
+        }
+
+
+        /* =========================
+           LIMPIAR FORMULARIO INSUMO
+        ========================= */
+
+        function limpiarFormulario() {
+
+            document.getElementById("nombre").value = "";
+
+            document.getElementById("stock").value = "";
+
+            document.getElementById("costo").value = "";
+
+        }
+
+
+        /* =========================
+           MOSTRAR INSUMOS
+        ========================= */
+
+        function mostrarInsumos() {
+
+            var lista =
+                document.getElementById("listaInsumos");
+
+
+            lista.innerHTML = "";
+
+
+            if (insumos.length === 0) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay insumos' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                var insumo = insumos[i];
+
+
+                lista.innerHTML +=
+
+                    '<div class="insumo">' +
+
+                        '<div class="insumo-nombre">' +
+                            insumo.nombre +
+                        '</div>' +
+
+                        '<div class="insumo-dato">' +
+                            'Stock: ' +
+                            insumo.stock +
+                            ' ' +
+                            insumo.unidad +
+                        '</div>' +
+
+                        '<div class="insumo-dato">' +
+                            'Costo: $' +
+                            insumo.costo.toLocaleString("es-AR") +
+                            ' / ' +
+                            insumo.unidad +
+                        '</div>' +
+
+                        '<div class="botones">' +
+
+                            '<button ' +
+                                'class="boton-modificar" ' +
+                                'onclick="modificarInsumo(' +
+                                insumo.id +
+                                ')">' +
+                                'Modificar' +
+                            '</button>' +
+
+                            '<button ' +
+                                'class="boton-eliminar" ' +
+                                'onclick="eliminarInsumo(' +
+                                insumo.id +
+                                ')">' +
+                                'Eliminar' +
+                            '</button>' +
+
+                        '</div>' +
+
+                    '</div>';
+
+            }
+
+        }
+
+
+        /* =========================
+           LISTA DE INSUMOS
+           PARA COMPRAS
+        ========================= */
+
+        function actualizarListaCompras() {
+
+            var select =
+                document.getElementById("compraInsumo");
+
+
+            select.innerHTML =
+                '<option value="">Seleccionar insumo</option>';
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                var insumo = insumos[i];
+
+
+                select.innerHTML +=
+
+                    '<option value="' +
+                    insumo.id +
+                    '">' +
+                    insumo.nombre +
+                    '</option>';
+
+            }
+
+
+            actualizarUnidadesCompra();
+
+        }
+
+
+        /* =========================
+           UNIDADES DE COMPRA
+        ========================= */
+
+        function actualizarUnidadesCompra() {
+
+            var selectInsumo =
+                document.getElementById("compraInsumo");
+
+            var selectUnidad =
+                document.getElementById("compraUnidad");
+
+
+            selectUnidad.innerHTML = "";
+
+
+            var id =
+                Number(selectInsumo.value);
+
+
+            if (!id) {
+
+                selectUnidad.innerHTML =
+                    '<option value="">' +
+                    'Primero seleccioná un insumo' +
+                    '</option>';
+
+                return;
+
+            }
+
+
+            var insumo = null;
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    insumo = insumos[i];
+
+                    break;
+
+                }
+
+            }
+
+
+            if (!insumo) {
+
+                return;
+
+            }
+
+
+            if (insumo.unidad === "g") {
+
+                selectUnidad.innerHTML =
+                    '<option value="g">Gramos (g)</option>' +
+                    '<option value="kg">Kilogramos (kg)</option>';
+
+            }
+
+            else if (insumo.unidad === "kg") {
+
+                selectUnidad.innerHTML =
+                    '<option value="kg">Kilogramos (kg)</option>' +
+                    '<option value="g">Gramos (g)</option>';
+
+            }
+
+            else if (insumo.unidad === "ml") {
+
+                selectUnidad.innerHTML =
+                    '<option value="ml">Mililitros (ml)</option>' +
+                    '<option value="litro">Litros (L)</option>';
+
+            }
+
+            else if (insumo.unidad === "litro") {
+
+                selectUnidad.innerHTML =
+                    '<option value="litro">Litros (L)</option>' +
+                    '<option value="ml">Mililitros (ml)</option>';
+
+            }
+
+            else {
+
+                selectUnidad.innerHTML =
+                    '<option value="unidad">Unidades</option>';
+
+            }
+
+        }
+
+
+        /* =========================
+           CONVERTIR CANTIDAD
+        ========================= */
+
+        function convertirCantidad(
+            cantidad,
+            unidadCompra,
+            unidadInsumo
+        ) {
+
+            if (
+                unidadCompra === "kg" &&
+                unidadInsumo === "g"
+            ) {
+
+                return cantidad * 1000;
+
+            }
+
+
+            if (
+                unidadCompra === "g" &&
+                unidadInsumo === "kg"
+            ) {
+
+                return cantidad / 1000;
+
+            }
+
+
+            if (
+                unidadCompra === "litro" &&
+                unidadInsumo === "ml"
+            ) {
+
+                return cantidad * 1000;
+
+            }
+
+
+            if (
+                unidadCompra === "ml" &&
+                unidadInsumo === "litro"
+            ) {
+
+                return cantidad / 1000;
+
+            }
+
+
+            return cantidad;
+
+        }
+
+
+        /* =========================
+           REGISTRAR COMPRA
+        ========================= */
+
+        function registrarCompra() {
+
+            var id =
+                Number(
+                    document.getElementById("compraInsumo").value
+                );
+
+            var cantidad =
+                Number(
+                    document.getElementById("compraCantidad").value
+                );
+
+            var unidadCompra =
+                document.getElementById("compraUnidad").value;
+
+            var precio =
+                Number(
+                    document.getElementById("compraPrecio").value
+                );
+
+
+            if (!id) {
+
+                alert("Seleccioná un insumo");
+
+                return;
+
+            }
+
+
+            if (!cantidad || cantidad <= 0) {
+
+                alert("Ingresá una cantidad válida");
+
+                return;
+
+            }
+
+
+            if (!precio || precio <= 0) {
+
+                alert("Ingresá el precio de la compra");
+
+                return;
+
+            }
+
+
+            var insumo = null;
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    insumo = insumos[i];
+
+                    break;
+
+                }
+
+            }
+
+
+            if (!insumo) {
+
+                alert("El insumo no existe");
+
+                return;
+
+            }
+
+
+            var cantidadConvertida =
+                convertirCantidad(
+                    cantidad,
+                    unidadCompra,
+                    insumo.unidad
+                );
+
+
+            /*
+                Por ahora usamos el costo
+                de la última compra.
+            */
+
+            var nuevoCosto =
+                precio / cantidadConvertida;
+
+
+            insumo.stock =
+                insumo.stock + cantidadConvertida;
+
+
+            insumo.costo =
+                nuevoCosto;
+
+
+            var compra = {
+
+                id: Date.now(),
+
+                insumoId: insumo.id,
+
+                insumoNombre: insumo.nombre,
+
+                cantidad: cantidad,
+
+                unidad: unidadCompra,
+
+                cantidadConvertida: cantidadConvertida,
+
+                unidadInterna: insumo.unidad,
+
+                precio: precio
+
+            };
+
+
+            compras.push(compra);
+
+
+            document.getElementById("compraCantidad").value = "";
+
+            document.getElementById("compraPrecio").value = "";
+
+
+            mostrarInsumos();
+
+            mostrarCompras();
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           MOSTRAR COMPRAS
+        ========================= */
+
+        function mostrarCompras() {
+
+            var lista =
+                document.getElementById("listaCompras");
+
+
+            lista.innerHTML = "";
+
+
+            if (compras.length === 0) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay compras' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < compras.length; i++) {
+
+                var compra = compras[i];
+
+
+                lista.innerHTML +=
+
+                    '<div class="compra">' +
+
+                        '<div class="compra-nombre">' +
+                            compra.insumoNombre +
+                        '</div>' +
+
+                        '<div class="compra-dato">' +
+                            'Compra: ' +
+                            compra.cantidad +
+                            ' ' +
+                            compra.unidad +
+                        '</div>' +
+
+                        '<div class="compra-dato">' +
+                            'Ingresó al stock: ' +
+                            compra.cantidadConvertida +
+                            ' ' +
+                            compra.unidadInterna +
+                        '</div>' +
+
+                        '<div class="compra-dato">' +
+                            'Precio: $' +
+                            compra.precio.toLocaleString("es-AR") +
+                        '</div>' +
+
+                    '</div>';
+
+            }
+
+        }
+
+
+        /* =========================
+           RECETAS
+        ========================= */
+
+        function actualizarIngredientesDisponibles() {
+
+            var select =
+                document.getElementById("ingredienteInsumo");
+
+
+            if (!select) {
+
+                return;
+
+            }
+
+
+            var valorActual =
+                select.value;
+
+
+            select.innerHTML =
+                '<option value="">Seleccionar insumo</option>';
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                var insumo = insumos[i];
+
+
+                select.innerHTML +=
+
+                    '<option value="' +
+                    insumo.id +
+                    '">' +
+                    insumo.nombre +
+                    '</option>';
+
+            }
+
+
+            if (valorActual !== "") {
+
+                select.value = valorActual;
+
+            }
+
+
+            actualizarUnidadesIngrediente();
+
+        }
+
+
+        /* =========================
+           UNIDADES DE INGREDIENTE
+        ========================= */
+
+        function actualizarUnidadesIngrediente() {
+
+            var selectInsumo =
+                document.getElementById("ingredienteInsumo");
+
+            var selectUnidad =
+                document.getElementById("ingredienteUnidad");
+
+
+            selectUnidad.innerHTML = "";
+
+
+            var id =
+                Number(selectInsumo.value);
+
+
+            if (!id) {
+
+                selectUnidad.innerHTML =
+                    '<option value="">' +
+                    'Primero seleccioná un insumo' +
+                    '</option>';
+
+                return;
+
+            }
+
+
+            var insumo = null;
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    insumo = insumos[i];
+
+                    break;
+
+                }
+
+            }
+
+
+            if (!insumo) {
+
+                return;
+
+            }
+
+
+            if (insumo.unidad === "g") {
+
+                selectUnidad.innerHTML =
+                    '<option value="g">Gramos (g)</option>' +
+                    '<option value="kg">Kilogramos (kg)</option>';
+
+            }
+
+            else if (insumo.unidad === "kg") {
+
+                selectUnidad.innerHTML =
+                    '<option value="kg">Kilogramos (kg)</option>' +
+                    '<option value="g">Gramos (g)</option>';
+
+            }
+
+            else if (insumo.unidad === "ml") {
+
+                selectUnidad.innerHTML =
+                    '<option value="ml">Mililitros (ml)</option>' +
+                    '<option value="litro">Litros (L)</option>';
+
+            }
+
+            else if (insumo.unidad === "litro") {
+
+                selectUnidad.innerHTML =
+                    '<option value="litro">Litros (L)</option>' +
+                    '<option value="ml">Mililitros (ml)</option>';
+
+            }
+
+            else {
+
+                selectUnidad.innerHTML =
+                    '<option value="unidad">Unidades</option>';
+
+            }
+
+        }
+
+
+        /* =========================
+           AGREGAR INGREDIENTE
+        ========================= */
+
+        function agregarIngrediente() {
+
+            var insumoId =
+                Number(
+                    document.getElementById("ingredienteInsumo").value
+                );
+
+            var cantidad =
+                Number(
+                    document.getElementById("ingredienteCantidad").value
+                );
+
+            var unidad =
+                document.getElementById("ingredienteUnidad").value;
+
+
+            if (!insumoId) {
+
+                alert("Seleccioná un insumo");
+
+                return;
+
+            }
+
+
+            if (!cantidad || cantidad <= 0) {
+
+                alert("Ingresá una cantidad válida");
+
+                return;
+
+            }
+
+
+            var insumo = null;
+
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === insumoId) {
+
+                    insumo = insumos[i];
+
+                    break;
+
+                }
+
+            }
+
+
+            if (!insumo) {
+
+                alert("El insumo no existe");
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < ingredientesReceta.length; i++) {
+
+                if (
+                    ingredientesReceta[i].insumoId === insumoId
+                ) {
+
+                    alert("Ese insumo ya está en la receta");
+
+                    return;
+
+                }
+
+            }
+
+
+            ingredientesReceta.push({
+
+                insumoId: insumoId,
+
+                cantidad: cantidad,
+
+                unidad: unidad
+
+            });
+
+
+            document.getElementById("ingredienteCantidad").value = "";
+
+
+            mostrarIngredientesReceta();
+
+        }
+
+
+        /* =========================
+           ELIMINAR INGREDIENTE
+        ========================= */
+
+        function eliminarIngrediente(indice) {
+
+            ingredientesReceta.splice(indice, 1);
+
+            mostrarIngredientesReceta();
+
+        }
+
+
+        /* =========================
+           OBTENER INSUMO
+        ========================= */
+
+        function obtenerInsumo(id) {
+
+            for (var i = 0; i < insumos.length; i++) {
+
+                if (insumos[i].id === id) {
+
+                    return insumos[i];
+
+                }
+
+            }
+
+
+            return null;
+
+        }
+
+
+        /* =========================
+           COSTO DE INGREDIENTES
+        ========================= */
+
+        function calcularCostoIngredientes(
+            ingredientes
+        ) {
+
+            var total = 0;
+
+
+            for (var i = 0; i < ingredientes.length; i++) {
+
+                var ingrediente =
+                    ingredientes[i];
+
+
+                var insumo =
+                    obtenerInsumo(ingrediente.insumoId);
+
+
+                if (!insumo) {
+
+                    continue;
+
+                }
+
+
+                var cantidadConvertida =
+                    convertirCantidad(
+                        ingrediente.cantidad,
+                        ingrediente.unidad,
+                        insumo.unidad
+                    );
+
+
+                total =
+                    total +
+                    cantidadConvertida *
+                    insumo.costo;
+
+            }
+
+
+            return total;
+
+        }
+
+
+        /* =========================
+           MOSTRAR INGREDIENTES
+        ========================= */
+
+        function mostrarIngredientesReceta() {
+
+            var lista =
+                document.getElementById(
+                    "listaIngredientesReceta"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            if (ingredientesReceta.length === 0) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay ingredientes' +
+                    '</div>';
+
+
+                mostrarCostoFormularioReceta();
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < ingredientesReceta.length; i++) {
+
+                var ingrediente =
+                    ingredientesReceta[i];
+
+
+                var insumo =
+                    obtenerInsumo(
+                        ingrediente.insumoId
+                    );
+
+
+                var nombre =
+                    insumo
+                        ? insumo.nombre
+                        : "Insumo eliminado";
+
+
+                lista.innerHTML +=
+
+                    '<div class="ingrediente">' +
+
+                        '<div class="ingrediente-nombre">' +
+                            nombre +
+                        '</div>' +
+
+                        '<div class="ingrediente-dato">' +
+                            'Cantidad: ' +
+                            ingrediente.cantidad +
+                            ' ' +
+                            ingrediente.unidad +
+                        '</div>' +
+
+                        '<button ' +
+                            'class="boton-eliminar" ' +
+                            'onclick="eliminarIngrediente(' +
+                            i +
+                            ')">' +
+                            'Eliminar' +
+                        '</button>' +
+
+                    '</div>';
+
+            }
+
+
+            mostrarCostoFormularioReceta();
+
+        }
+
+
+        /* =========================
+           COSTO DEL FORMULARIO
+        ========================= */
+
+        function mostrarCostoFormularioReceta() {
+
+            var contenedor =
+                document.getElementById(
+                    "costoFormularioReceta"
+                );
+
+
+            var costo =
+                calcularCostoIngredientes(
+                    ingredientesReceta
+                );
+
+
+            var rendimiento =
+                Number(
+                    document.getElementById(
+                        "rendimientoReceta"
+                    ).value
+                );
+
+
+            var texto =
+                '<div class="costo-receta">' +
+
+                    '<div class="receta-dato">' +
+                        '<strong>Costo total:</strong> $' +
+                        costo.toLocaleString("es-AR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) +
+                    '</div>';
+
+
+            if (rendimiento > 0) {
+
+                var costoUnitario =
+                    costo / rendimiento;
+
+
+                texto +=
+
+                    '<div class="receta-dato">' +
+                        '<strong>Costo por unidad:</strong> $' +
+                        costoUnitario.toLocaleString("es-AR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }) +
+                    '</div>';
+
+            }
+
+
+            texto +=
+                '</div>';
+
+
+            contenedor.innerHTML = texto;
+
+        }
+
+
+        /* =========================
+           CREAR RECETA
+        ========================= */
+
+        function crearReceta() {
+
+            var nombre =
+                document.getElementById(
+                    "nombreReceta"
+                ).value.trim();
+
+
+            var rendimiento =
+                Number(
+                    document.getElementById(
+                        "rendimientoReceta"
+                    ).value
+                );
+
+
+            if (nombre === "") {
+
+                alert("Ingresá un nombre para la receta");
+
+                return;
+
+            }
+
+
+            if (!rendimiento || rendimiento <= 0) {
+
+                alert("Ingresá un rendimiento válido");
+
+                return;
+
+            }
+
+
+            if (ingredientesReceta.length === 0) {
+
+                alert("Agregá al menos un ingrediente");
+
+                return;
+
+            }
+
+
+            var receta = {
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                rendimiento: rendimiento,
+
+                ingredientes:
+                    copiarIngredientes(
+                        ingredientesReceta
+                    )
+
+            };
+
+
+            recetas.push(receta);
+
+
+            cancelarEdicionReceta();
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           COPIAR INGREDIENTES
+        ========================= */
+
+        function copiarIngredientes(
+            ingredientes
+        ) {
+
+            var copia = [];
+
+
+            for (var i = 0; i < ingredientes.length; i++) {
+
+                copia.push({
+
+                    insumoId:
+                        ingredientes[i].insumoId,
+
+                    cantidad:
+                        ingredientes[i].cantidad,
+
+                    unidad:
+                        ingredientes[i].unidad
+
+                });
+
+            }
+
+
+            return copia;
+
+        }
+
+
+        /* =========================
+           MODIFICAR RECETA
+        ========================= */
+
+        function modificarReceta(id) {
+
+            for (var i = 0; i < recetas.length; i++) {
+
+                if (recetas[i].id === id) {
+
+                    var receta =
+                        recetas[i];
+
+
+                    document.getElementById(
+                        "nombreReceta"
+                    ).value =
+                        receta.nombre;
+
+
+                    document.getElementById(
+                        "rendimientoReceta"
+                    ).value =
+                        receta.rendimiento;
+
+
+                    ingredientesReceta =
+                        copiarIngredientes(
+                            receta.ingredientes
+                        );
+
+
+                    recetaEditando =
+                        id;
+
+
+                    document.getElementById(
+                        "tituloFormularioReceta"
+                    ).innerText =
+                        "Modificar receta";
+
+
+                    document.getElementById(
+                        "botonGuardarReceta"
+                    ).innerText =
+                        "Guardar cambios";
+
+
+                    document.getElementById(
+                        "botonGuardarReceta"
+                    ).onclick =
+                        function () {
+                            guardarCambiosReceta();
+                        };
+
+
+                    document.getElementById(
+                        "botonCancelarReceta"
+                    ).style.display =
+                        "block";
+
+
+                    mostrarIngredientesReceta();
+
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+        /* =========================
+           GUARDAR CAMBIOS RECETA
+        ========================= */
+
+        function guardarCambiosReceta() {
+
+            var nombre =
+                document.getElementById(
+                    "nombreReceta"
+                ).value.trim();
+
+
+            var rendimiento =
+                Number(
+                    document.getElementById(
+                        "rendimientoReceta"
+                    ).value
+                );
+
+
+            if (nombre === "") {
+
+                alert("Ingresá un nombre para la receta");
+
+                return;
+
+            }
+
+
+            if (!rendimiento || rendimiento <= 0) {
+
+                alert("Ingresá un rendimiento válido");
+
+                return;
+
+            }
+
+
+            if (ingredientesReceta.length === 0) {
+
+                alert("Agregá al menos un ingrediente");
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < recetas.length; i++) {
+
+                if (recetas[i].id === recetaEditando) {
+
+                    recetas[i].nombre =
+                        nombre;
+
+                    recetas[i].rendimiento =
+                        rendimiento;
+
+                    recetas[i].ingredientes =
+                        copiarIngredientes(
+                            ingredientesReceta
+                        );
+
+                    break;
+
+                }
+
+            }
+
+
+            cancelarEdicionReceta();
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           CANCELAR EDICIÓN RECETA
+        ========================= */
+
+        function cancelarEdicionReceta() {
+
+            recetaEditando = null;
+
+            ingredientesReceta = [];
+
+
+            document.getElementById(
+                "nombreReceta"
+            ).value = "";
+
+
+            document.getElementById(
+                "rendimientoReceta"
+            ).value = "";
+
+
+            document.getElementById(
+                "tituloFormularioReceta"
+            ).innerText =
+                "Nueva receta";
+
+
+            document.getElementById(
+                "botonGuardarReceta"
+            ).innerText =
+                "Crear receta";
+
+
+            document.getElementById(
+                "botonGuardarReceta"
+            ).onclick =
+                function () {
+                    crearReceta();
+                };
+
+
+            document.getElementById(
+                "botonCancelarReceta"
+            ).style.display =
+                "none";
+
+
+            mostrarIngredientesReceta();
+
+        }
+
+
+        /* =========================
+           ELIMINAR RECETA
+        ========================= */
+
+        function eliminarReceta(id) {
+
+            var confirmar =
+                confirm("¿Querés eliminar esta receta?");
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < recetas.length; i++) {
+
+                if (recetas[i].id === id) {
+
+                    recetas.splice(i, 1);
+
+                    break;
+
+                }
+
+            }
+
+
+            mostrarRecetas();
+
+        }
+
+
+        /* =========================
+           MOSTRAR RECETAS
+        ========================= */
+
+        function mostrarRecetas() {
+
+            var lista =
+                document.getElementById(
+                    "listaRecetas"
+                );
+
+
+            if (!lista) {
+
+                return;
+
+            }
+
+
+            lista.innerHTML = "";
+
+
+            if (recetas.length === 0) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay recetas' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            for (var i = 0; i < recetas.length; i++) {
+
+                var receta =
+                    recetas[i];
+
+
+                var costoTotal =
+                    calcularCostoIngredientes(
+                        receta.ingredientes
+                    );
+
+
+                var costoUnitario =
+                    costoTotal /
+                    receta.rendimiento;
+
+
+                var ingredientesHTML =
+                    "";
+
+
+                for (
+                    var j = 0;
+                    j < receta.ingredientes.length;
+                    j++
+                ) {
+
+                    var ingrediente =
+                        receta.ingredientes[j];
+
+
+                    var insumo =
+                        obtenerInsumo(
+                            ingrediente.insumoId
+                        );
+
+
+                    var nombreIngrediente =
+                        insumo
+                            ? insumo.nombre
+                            : "Insumo eliminado";
+
+
+                    ingredientesHTML +=
+
+                        '<div class="receta-dato">' +
+                            nombreIngrediente +
+                            ': ' +
+                            ingrediente.cantidad +
+                            ' ' +
+                            ingrediente.unidad +
+                        '</div>';
+
+                }
+
+
+                lista.innerHTML +=
+
+                    '<div class="receta">' +
+
+                        '<div class="receta-nombre">' +
+                            receta.nombre +
+                        '</div>' +
+
+                        '<div class="receta-dato">' +
+                            'Rendimiento: ' +
+                            receta.rendimiento +
+                        '</div>' +
+
+                        '<div>' +
+                            ingredientesHTML +
+                        '</div>' +
+
+                        '<div class="costo-receta">' +
+
+                            '<div class="receta-dato">' +
+                                '<strong>Costo total:</strong> $' +
+                                costoTotal.toLocaleString("es-AR", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }) +
+                            '</div>' +
+
+                            '<div class="receta-dato">' +
+                                '<strong>Costo por unidad:</strong> $' +
+                                costoUnitario.toLocaleString("es-AR", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }) +
+                            '</div>' +
+
+                        '</div>' +
+
+                        '<div class="botones">' +
+
+                            '<button ' +
+                                'class="boton-modificar" ' +
+                                'onclick="modificarReceta(' +
+                                receta.id +
+                                ')">' +
+                                'Modificar' +
+                            '</button>' +
+
+                            '<button ' +
+                                'class="boton-eliminar" ' +
+                                'onclick="eliminarReceta(' +
+                                receta.id +
+                                ')">' +
+                                'Eliminar' +
+                            '</button>' +
+
+                        '</div>' +
+
+                    '</div>';
+
+            }
+
+        }
+
+
+        /* =========================
+           ACTUALIZAR COSTO
+           AL CAMBIAR RENDIMIENTO
+        ========================= */
+
+        document
+            .getElementById("rendimientoReceta")
+            .addEventListener(
+                "input",
+                function () {
+
+                    mostrarCostoFormularioReceta();
+
+                }
+            );
+
+
+        /* =========================
+           INICIALIZAR
+        ========================= */
+
+        actualizarListaCompras();
+
+        actualizarIngredientesDisponibles();
+
+        mostrarCompras();
+
+        mostrarRecetas();
+
+    </script>
+
+</body>
+
+</html>
