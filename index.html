@@ -311,6 +311,71 @@
         }
 
         /* =========================
+           PRODUCCION
+        ========================= */
+
+        .produccion {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .produccion-nombre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .produccion-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .produccion-insumos {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #444;
+        }
+
+        .produccion-insumo {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .produccion-resumen {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .produccion-resumen-titulo {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .produccion-resumen-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           VENTAS
+        ========================= */
+
+        .venta {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
            VACIO
         ========================= */
 
@@ -917,7 +982,7 @@
 
             <button
                 class="boton-nuevo"
-                onclick="mostrarFormulario('formularioProduccion')"
+                onclick="abrirFormularioProduccion()"
             >
                 + Nueva producción
             </button>
@@ -936,20 +1001,41 @@
 
                     <div class="form">
 
-                        <input
-                            type="text"
-                            placeholder="Producto"
+                        <select
+                            id="productoProduccion"
+                            onchange="mostrarResumenProduccion()"
                         >
 
+                            <option value="">
+                                Seleccionar producto
+                            </option>
+
+                        </select>
+
+
                         <input
+                            id="cantidadProduccion"
                             type="number"
                             min="1"
-                            placeholder="Cantidad"
+                            step="1"
+                            placeholder="Cantidad a producir"
+                            oninput="mostrarResumenProduccion()"
                         >
 
-                        <button type="button">
+
+                        <div
+                            id="resumenProduccion"
+                        >
+                        </div>
+
+
+                        <button
+                            type="button"
+                            onclick="registrarProduccion()"
+                        >
                             Registrar producción
                         </button>
+
 
                         <button
                             type="button"
@@ -972,8 +1058,12 @@
                     Producciones
                 </h2>
 
-                <div class="vacio">
-                    Todavía no hay producciones
+                <div id="listaProducciones">
+
+                    <div class="vacio">
+                        Todavía no hay producciones
+                    </div>
+
                 </div>
 
             </div>
@@ -1090,6 +1180,12 @@
             ) || [];
 
 
+        var producciones =
+            JSON.parse(
+                localStorage.getItem("producciones")
+            ) || [];
+
+
         var insumoEditando = null;
 
         var recetaEditando = null;
@@ -1187,6 +1283,16 @@
         }
 
 
+        function guardarProducciones() {
+
+            localStorage.setItem(
+                "producciones",
+                JSON.stringify(producciones)
+            );
+
+        }
+
+
         /* =========================
            CAMBIAR SECCIÓN
         ========================= */
@@ -1260,6 +1366,15 @@
                 actualizarRecetasDisponiblesProducto();
 
                 mostrarProductos();
+
+            }
+
+
+            if (nombre === "produccion") {
+
+                actualizarProductosDisponiblesProduccion();
+
+                mostrarProducciones();
 
             }
 
@@ -1562,6 +1677,8 @@
 
             mostrarProductos();
 
+            mostrarResumenProduccion();
+
         }
 
 
@@ -1616,6 +1733,8 @@
             mostrarRecetas();
 
             mostrarProductos();
+
+            mostrarResumenProduccion();
 
         }
 
@@ -2198,6 +2317,8 @@
             mostrarRecetas();
 
             mostrarProductos();
+
+            mostrarResumenProduccion();
 
 
             ocultarFormulario(
@@ -3181,6 +3302,8 @@
 
             actualizarRecetasDisponiblesProducto();
 
+            mostrarResumenProduccion();
+
         }
 
 
@@ -3305,6 +3428,8 @@
             actualizarRecetasDisponiblesProducto();
 
             mostrarProductos();
+
+            mostrarResumenProduccion();
 
         }
 
@@ -3788,7 +3913,10 @@
                     diametro,
 
                 precioVenta:
-                    precio
+                    precio,
+
+                stock:
+                    0
 
             };
 
@@ -3804,6 +3932,8 @@
             cancelarEdicionProducto();
 
             mostrarProductos();
+
+            actualizarProductosDisponiblesProduccion();
 
         }
 
@@ -4080,6 +4210,15 @@
                     productos[i].precioVenta =
                         precio;
 
+                    if (
+                        productos[i].stock === undefined
+                    ) {
+
+                        productos[i].stock =
+                            0;
+
+                    }
+
                     break;
 
                 }
@@ -4093,6 +4232,8 @@
             cancelarEdicionProducto();
 
             mostrarProductos();
+
+            actualizarProductosDisponiblesProduccion();
 
         }
 
@@ -4235,6 +4376,8 @@
 
             mostrarProductos();
 
+            actualizarProductosDisponiblesProduccion();
+
         }
 
 
@@ -4311,6 +4454,10 @@
                 }
 
 
+                var stockProducto =
+                    producto.stock || 0;
+
+
                 lista.innerHTML +=
 
                     '<div class="producto">' +
@@ -4334,6 +4481,12 @@
                             '<strong>Diámetro:</strong> ' +
                             producto.diametro +
                             ' cm' +
+                        '</div>' +
+
+                        '<div class="producto-dato">' +
+                            '<strong>Stock:</strong> ' +
+                            stockProducto +
+                            ' unidades' +
                         '</div>' +
 
                         '<div class="producto-dato">' +
@@ -4403,6 +4556,751 @@
         }
 
 
+        /* ==================================================
+           PRODUCCIÓN
+        ================================================== */
+
+
+        /* =========================
+           ABRIR PRODUCCIÓN
+        ========================= */
+
+        function abrirFormularioProduccion() {
+
+            actualizarProductosDisponiblesProduccion();
+
+            document
+                .getElementById(
+                    "productoProduccion"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "cantidadProduccion"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "resumenProduccion"
+                )
+                .innerHTML = "";
+
+
+            mostrarFormulario(
+                "formularioProduccion"
+            );
+
+        }
+
+
+        /* =========================
+           ACTUALIZAR PRODUCTOS
+        ========================= */
+
+        function actualizarProductosDisponiblesProduccion() {
+
+            var select =
+                document.getElementById(
+                    "productoProduccion"
+                );
+
+
+            if (!select) {
+                return;
+            }
+
+
+            var valorActual =
+                select.value;
+
+
+            select.innerHTML =
+                '<option value="">' +
+                'Seleccionar producto' +
+                '</option>';
+
+
+            for (
+                var i = 0;
+                i < productos.length;
+                i++
+            ) {
+
+                var producto =
+                    productos[i];
+
+
+                select.innerHTML +=
+
+                    '<option value="' +
+                    producto.id +
+                    '">' +
+                    producto.nombre +
+                    '</option>';
+
+            }
+
+
+            if (valorActual !== "") {
+
+                select.value =
+                    valorActual;
+
+            }
+
+
+            mostrarResumenProduccion();
+
+        }
+
+
+        /* =========================
+           MOSTRAR RESUMEN
+        ========================= */
+
+        function mostrarResumenProduccion() {
+
+            var contenedor =
+                document.getElementById(
+                    "resumenProduccion"
+                );
+
+
+            if (!contenedor) {
+                return;
+            }
+
+
+            var productoId =
+                Number(
+                    document.getElementById(
+                        "productoProduccion"
+                    ).value
+                );
+
+
+            var cantidad =
+                Number(
+                    document.getElementById(
+                        "cantidadProduccion"
+                    ).value
+                );
+
+
+            if (
+                !productoId ||
+                !cantidad ||
+                cantidad <= 0
+            ) {
+
+                contenedor.innerHTML = "";
+
+                return;
+
+            }
+
+
+            var producto =
+                obtenerProducto(
+                    productoId
+                );
+
+
+            if (!producto) {
+
+                contenedor.innerHTML = "";
+
+                return;
+
+            }
+
+
+            var receta =
+                obtenerReceta(
+                    producto.recetaId
+                );
+
+
+            if (!receta) {
+
+                contenedor.innerHTML =
+
+                    '<div class="produccion-resumen">' +
+
+                        '<div class="produccion-resumen-dato">' +
+                            'La receta asociada no existe.' +
+                        '</div>' +
+
+                    '</div>';
+
+                return;
+
+            }
+
+
+            var factor =
+                cantidad /
+                receta.rendimiento;
+
+
+            var html =
+
+                '<div class="produccion-resumen">' +
+
+                    '<div class="produccion-resumen-titulo">' +
+                        'Insumos necesarios' +
+                    '</div>' +
+
+                    '<div class="produccion-resumen-dato">' +
+                        'Producto: ' +
+                        producto.nombre +
+                    '</div>' +
+
+                    '<div class="produccion-resumen-dato">' +
+                        'Cantidad a producir: ' +
+                        cantidad +
+                        ' unidades' +
+                    '</div>' +
+
+                    '<div class="produccion-resumen-dato">' +
+                        'Rendimiento de la receta: ' +
+                        receta.rendimiento +
+                        ' unidades' +
+                    '</div>';
+
+
+            for (
+                var i = 0;
+                i < receta.ingredientes.length;
+                i++
+            ) {
+
+                var ingrediente =
+                    receta.ingredientes[i];
+
+
+                var insumo =
+                    obtenerInsumo(
+                        ingrediente.insumoId
+                    );
+
+
+                if (!insumo) {
+
+                    html +=
+
+                        '<div class="produccion-resumen-dato">' +
+                            '⚠ Insumo eliminado' +
+                        '</div>';
+
+                    continue;
+
+                }
+
+
+                var cantidadReceta =
+                    convertirCantidad(
+                        ingrediente.cantidad,
+                        ingrediente.unidad,
+                        insumo.unidad
+                    );
+
+
+                var cantidadNecesaria =
+                    cantidadReceta *
+                    factor;
+
+
+                var suficiente =
+                    insumo.stock >=
+                    cantidadNecesaria;
+
+
+                html +=
+
+                    '<div class="produccion-insumo">' +
+
+                        insumo.nombre +
+                        ': ' +
+
+                        cantidadNecesaria.toLocaleString(
+                            "es-AR",
+                            {
+                                maximumFractionDigits: 4
+                            }
+                        ) +
+                        ' ' +
+                        insumo.unidad +
+
+                        ' — stock: ' +
+
+                        insumo.stock.toLocaleString(
+                            "es-AR",
+                            {
+                                maximumFractionDigits: 4
+                            }
+                        ) +
+                        ' ' +
+                        insumo.unidad +
+
+                        (
+                            suficiente
+                                ? ''
+                                : ' ⚠ STOCK INSUFICIENTE'
+                        ) +
+
+                    '</div>';
+
+            }
+
+
+            html +=
+                '</div>';
+
+
+            contenedor.innerHTML =
+                html;
+
+        }
+
+
+        /* =========================
+           REGISTRAR PRODUCCIÓN
+        ========================= */
+
+        function registrarProduccion() {
+
+            var productoId =
+                Number(
+                    document
+                        .getElementById(
+                            "productoProduccion"
+                        )
+                        .value
+                );
+
+
+            var cantidad =
+                Number(
+                    document
+                        .getElementById(
+                            "cantidadProduccion"
+                        )
+                        .value
+                );
+
+
+            if (!productoId) {
+
+                alert(
+                    "Seleccioná un producto"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !cantidad ||
+                cantidad <= 0
+            ) {
+
+                alert(
+                    "Ingresá una cantidad válida"
+                );
+
+                return;
+
+            }
+
+
+            var producto =
+                obtenerProducto(
+                    productoId
+                );
+
+
+            if (!producto) {
+
+                alert(
+                    "El producto no existe"
+                );
+
+                return;
+
+            }
+
+
+            var receta =
+                obtenerReceta(
+                    producto.recetaId
+                );
+
+
+            if (!receta) {
+
+                alert(
+                    "El producto no tiene una receta válida"
+                );
+
+                return;
+
+            }
+
+
+            var factor =
+                cantidad /
+                receta.rendimiento;
+
+
+            /*
+               Primero calculamos todo.
+
+               No modificamos ningún stock
+               hasta comprobar que todos
+               los insumos estén disponibles.
+            */
+
+            var consumos = [];
+
+
+            for (
+                var i = 0;
+                i < receta.ingredientes.length;
+                i++
+            ) {
+
+                var ingrediente =
+                    receta.ingredientes[i];
+
+
+                var insumo =
+                    obtenerInsumo(
+                        ingrediente.insumoId
+                    );
+
+
+                if (!insumo) {
+
+                    alert(
+                        "La receta contiene un insumo que ya no existe"
+                    );
+
+                    return;
+
+                }
+
+
+                var cantidadReceta =
+                    convertirCantidad(
+                        ingrediente.cantidad,
+                        ingrediente.unidad,
+                        insumo.unidad
+                    );
+
+
+                var cantidadNecesaria =
+                    cantidadReceta *
+                    factor;
+
+
+                if (
+                    insumo.stock <
+                    cantidadNecesaria
+                ) {
+
+                    alert(
+                        "Stock insuficiente de " +
+                        insumo.nombre +
+                        ". Necesitás " +
+                        cantidadNecesaria +
+                        " " +
+                        insumo.unidad +
+                        " y tenés " +
+                        insumo.stock +
+                        " " +
+                        insumo.unidad +
+                        "."
+                    );
+
+                    return;
+
+                }
+
+
+                consumos.push({
+
+                    insumoId:
+                        insumo.id,
+
+                    insumoNombre:
+                        insumo.nombre,
+
+                    cantidad:
+                        cantidadNecesaria,
+
+                    unidad:
+                        insumo.unidad
+
+                });
+
+            }
+
+
+            /*
+               Ahora sí modificamos los stocks.
+            */
+
+            for (
+                var i = 0;
+                i < consumos.length;
+                i++
+            ) {
+
+                var consumo =
+                    consumos[i];
+
+
+                var insumo =
+                    obtenerInsumo(
+                        consumo.insumoId
+                    );
+
+
+                insumo.stock =
+                    insumo.stock -
+                    consumo.cantidad;
+
+            }
+
+
+            if (
+                producto.stock === undefined
+            ) {
+
+                producto.stock =
+                    0;
+
+            }
+
+
+            producto.stock =
+                producto.stock +
+                cantidad;
+
+
+            var produccion = {
+
+                id:
+                    Date.now(),
+
+                productoId:
+                    producto.id,
+
+                productoNombre:
+                    producto.nombre,
+
+                recetaId:
+                    receta.id,
+
+                recetaNombre:
+                    receta.nombre,
+
+                cantidad:
+                    cantidad,
+
+                fecha:
+                    new Date().toISOString(),
+
+                consumos:
+                    consumos
+
+            };
+
+
+            producciones.push(
+                produccion
+            );
+
+
+            guardarInsumos();
+
+            guardarProductos();
+
+            guardarProducciones();
+
+
+            mostrarInsumos();
+
+            mostrarProductos();
+
+            mostrarProducciones();
+
+
+            document
+                .getElementById(
+                    "productoProduccion"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "cantidadProduccion"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "resumenProduccion"
+                )
+                .innerHTML = "";
+
+
+            ocultarFormulario(
+                "formularioProduccion"
+            );
+
+        }
+
+
+        /* =========================
+           MOSTRAR PRODUCCIONES
+        ========================= */
+
+        function mostrarProducciones() {
+
+            var lista =
+                document.getElementById(
+                    "listaProducciones"
+                );
+
+
+            if (!lista) {
+                return;
+            }
+
+
+            lista.innerHTML = "";
+
+
+            if (
+                producciones.length === 0
+            ) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay producciones' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            for (
+                var i = producciones.length - 1;
+                i >= 0;
+                i--
+            ) {
+
+                var produccion =
+                    producciones[i];
+
+
+                var fecha =
+                    new Date(
+                        produccion.fecha
+                    );
+
+
+                var fechaTexto =
+                    fecha.toLocaleString(
+                        "es-AR"
+                    );
+
+
+                var consumosHTML =
+                    "";
+
+
+                for (
+                    var j = 0;
+                    j < produccion.consumos.length;
+                    j++
+                ) {
+
+                    var consumo =
+                        produccion.consumos[j];
+
+
+                    consumosHTML +=
+
+                        '<div class="produccion-insumo">' +
+
+                            consumo.insumoNombre +
+                            ': ' +
+                            consumo.cantidad.toLocaleString(
+                                "es-AR",
+                                {
+                                    maximumFractionDigits: 4
+                                }
+                            ) +
+                            ' ' +
+                            consumo.unidad +
+
+                        '</div>';
+
+                }
+
+
+                lista.innerHTML +=
+
+                    '<div class="produccion">' +
+
+                        '<div class="produccion-nombre">' +
+                            produccion.productoNombre +
+                        '</div>' +
+
+                        '<div class="produccion-dato">' +
+                            '<strong>Cantidad:</strong> ' +
+                            produccion.cantidad +
+                            ' unidades' +
+                        '</div>' +
+
+                        '<div class="produccion-dato">' +
+                            '<strong>Receta:</strong> ' +
+                            produccion.recetaNombre +
+                        '</div>' +
+
+                        '<div class="produccion-dato">' +
+                            '<strong>Fecha:</strong> ' +
+                            fechaTexto +
+                        '</div>' +
+
+                        '<div class="produccion-insumos">' +
+
+                            '<div class="produccion-dato">' +
+                                '<strong>Insumos consumidos:</strong>' +
+                            '</div>' +
+
+                            consumosHTML +
+
+                        '</div>' +
+
+                    '</div>';
+
+            }
+
+        }
+
+
         /* =========================
            ACTUALIZAR COSTO RECETA
         ========================= */
@@ -4456,6 +5354,11 @@
         actualizarRecetasDisponiblesProducto();
 
         mostrarProductos();
+
+        actualizarProductosDisponiblesProduccion();
+
+        mostrarProducciones();
+
 
     </script>
 
