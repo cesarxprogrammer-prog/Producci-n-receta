@@ -236,6 +236,30 @@
             border-top: 1px solid #444;
         }
 
+        .rendimiento-info {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .rendimiento-info label {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .rendimiento-info input {
+            margin-bottom: 6px;
+        }
+
+        .rendimiento-ayuda {
+            color: #888;
+            font-size: 13px;
+        }
+
 
         /* =========================
            VACIO
@@ -501,6 +525,8 @@
             class="seccion"
         >
 
+            <!-- DATOS GENERALES DE LA RECETA -->
+
             <div class="card">
 
                 <h2 id="tituloFormularioReceta">
@@ -515,13 +541,51 @@
                         placeholder="Nombre de la receta"
                     >
 
+                </div>
+
+            </div>
+
+
+            <!-- RENDIMIENTO DE TODA LA RECETA -->
+
+            <div class="card">
+
+                <h2>
+                    Rendimiento
+                </h2>
+
+                <div class="rendimiento-info">
+
+                    <label for="rendimientoReceta">
+                        Esta receta produce:
+                    </label>
+
                     <input
                         id="rendimientoReceta"
                         type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Rendimiento"
+                        min="1"
+                        step="1"
+                        placeholder="Cantidad de unidades"
                     >
+
+                    <div class="rendimiento-ayuda">
+                        Todos los ingredientes agregados pertenecen a este mismo rendimiento.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INGREDIENTES -->
+
+            <div class="card">
+
+                <h2>
+                    Ingredientes de la receta
+                </h2>
+
+                <div class="form">
 
                     <select
                         id="ingredienteInsumo"
@@ -557,10 +621,12 @@
             </div>
 
 
+            <!-- LISTA DE INGREDIENTES -->
+
             <div class="card">
 
                 <h2>
-                    Ingredientes
+                    Ingredientes agregados
                 </h2>
 
                 <div id="listaIngredientesReceta">
@@ -576,6 +642,8 @@
 
             </div>
 
+
+            <!-- GUARDAR RECETA -->
 
             <div class="card">
 
@@ -599,6 +667,8 @@
 
             </div>
 
+
+            <!-- RECETAS EXISTENTES -->
 
             <div class="card">
 
@@ -1400,61 +1470,39 @@
             if (insumo.unidad === "g") {
 
                 selectUnidad.innerHTML =
-                    '<option value="g">' +
-                    'Gramos (g)' +
-                    '</option>' +
-
-                    '<option value="kg">' +
-                    'Kilogramos (kg)' +
-                    '</option>';
+                    '<option value="g">Gramos (g)</option>' +
+                    '<option value="kg">Kilogramos (kg)</option>';
 
             }
 
             else if (insumo.unidad === "kg") {
 
                 selectUnidad.innerHTML =
-                    '<option value="kg">' +
-                    'Kilogramos (kg)' +
-                    '</option>' +
-
-                    '<option value="g">' +
-                    'Gramos (g)' +
-                    '</option>';
+                    '<option value="kg">Kilogramos (kg)</option>' +
+                    '<option value="g">Gramos (g)</option>';
 
             }
 
             else if (insumo.unidad === "ml") {
 
                 selectUnidad.innerHTML =
-                    '<option value="ml">' +
-                    'Mililitros (ml)' +
-                    '</option>' +
-
-                    '<option value="litro">' +
-                    'Litros (L)' +
-                    '</option>';
+                    '<option value="ml">Mililitros (ml)</option>' +
+                    '<option value="litro">Litros (L)</option>';
 
             }
 
             else if (insumo.unidad === "litro") {
 
                 selectUnidad.innerHTML =
-                    '<option value="litro">' +
-                    'Litros (L)' +
-                    '</option>' +
-
-                    '<option value="ml">' +
-                    'Mililitros (ml)' +
-                    '</option>';
+                    '<option value="litro">Litros (L)</option>' +
+                    '<option value="ml">Mililitros (ml)</option>';
 
             }
 
             else {
 
                 selectUnidad.innerHTML =
-                    '<option value="unidad">' +
-                    'Unidades' +
-                    '</option>';
+                    '<option value="unidad">Unidades</option>';
 
             }
 
@@ -1562,9 +1610,7 @@
 
             if (!id) {
 
-                alert(
-                    "Seleccioná un insumo"
-                );
+                alert("Seleccioná un insumo");
 
                 return;
 
@@ -1576,9 +1622,7 @@
                 cantidad <= 0
             ) {
 
-                alert(
-                    "Ingresá una cantidad válida"
-                );
+                alert("Ingresá una cantidad válida");
 
                 return;
 
@@ -1590,9 +1634,7 @@
                 precio <= 0
             ) {
 
-                alert(
-                    "Ingresá el precio de la compra"
-                );
+                alert("Ingresá el precio de la compra");
 
                 return;
 
@@ -1618,9 +1660,7 @@
 
             if (!insumo) {
 
-                alert(
-                    "El insumo no existe"
-                );
+                alert("El insumo no existe");
 
                 return;
 
@@ -1634,11 +1674,6 @@
                     insumo.unidad
                 );
 
-
-            /*
-                Por ahora usamos
-                el costo de la última compra.
-            */
 
             var nuevoCosto =
                 precio /
@@ -1907,61 +1942,39 @@
             if (insumo.unidad === "g") {
 
                 selectUnidad.innerHTML =
-                    '<option value="g">' +
-                    'Gramos (g)' +
-                    '</option>' +
-
-                    '<option value="kg">' +
-                    'Kilogramos (kg)' +
-                    '</option>';
+                    '<option value="g">Gramos (g)</option>' +
+                    '<option value="kg">Kilogramos (kg)</option>';
 
             }
 
             else if (insumo.unidad === "kg") {
 
                 selectUnidad.innerHTML =
-                    '<option value="kg">' +
-                    'Kilogramos (kg)' +
-                    '</option>' +
-
-                    '<option value="g">' +
-                    'Gramos (g)' +
-                    '</option>';
+                    '<option value="kg">Kilogramos (kg)</option>' +
+                    '<option value="g">Gramos (g)</option>';
 
             }
 
             else if (insumo.unidad === "ml") {
 
                 selectUnidad.innerHTML =
-                    '<option value="ml">' +
-                    'Mililitros (ml)' +
-                    '</option>' +
-
-                    '<option value="litro">' +
-                    'Litros (L)' +
-                    '</option>';
+                    '<option value="ml">Mililitros (ml)</option>' +
+                    '<option value="litro">Litros (L)</option>';
 
             }
 
             else if (insumo.unidad === "litro") {
 
                 selectUnidad.innerHTML =
-                    '<option value="litro">' +
-                    'Litros (L)' +
-                    '</option>' +
-
-                    '<option value="ml">' +
-                    'Mililitros (ml)' +
-                    '</option>';
+                    '<option value="litro">Litros (L)</option>' +
+                    '<option value="ml">Mililitros (ml)</option>';
 
             }
 
             else {
 
                 selectUnidad.innerHTML =
-                    '<option value="unidad">' +
-                    'Unidades' +
-                    '</option>';
+                    '<option value="unidad">Unidades</option>';
 
             }
 
@@ -2004,9 +2017,7 @@
 
             if (!insumoId) {
 
-                alert(
-                    "Seleccioná un insumo"
-                );
+                alert("Seleccioná un insumo");
 
                 return;
 
@@ -2018,9 +2029,7 @@
                 cantidad <= 0
             ) {
 
-                alert(
-                    "Ingresá una cantidad válida"
-                );
+                alert("Ingresá una cantidad válida");
 
                 return;
 
@@ -2035,9 +2044,7 @@
 
             if (!insumo) {
 
-                alert(
-                    "El insumo no existe"
-                );
+                alert("El insumo no existe");
 
                 return;
 
@@ -2051,8 +2058,7 @@
             ) {
 
                 if (
-                    ingredientesReceta[i]
-                        .insumoId ===
+                    ingredientesReceta[i].insumoId ===
                     insumoId
                 ) {
 
@@ -2300,7 +2306,7 @@
                 '<div class="costo-receta">' +
 
                     '<div class="receta-dato">' +
-                        '<strong>Costo total:</strong> $' +
+                        '<strong>Costo total de la receta:</strong> $' +
                         costo.toLocaleString(
                             "es-AR",
                             {
@@ -2549,7 +2555,6 @@
 
 
                     mostrarIngredientesReceta();
-
 
                     break;
 
@@ -2867,8 +2872,9 @@
                         '</div>' +
 
                         '<div class="receta-dato">' +
-                            'Rendimiento: ' +
+                            '<strong>Rendimiento de la receta:</strong> ' +
                             receta.rendimiento +
+                            ' unidades' +
                         '</div>' +
 
                         '<div>' +
@@ -2878,7 +2884,7 @@
                         '<div class="costo-receta">' +
 
                             '<div class="receta-dato">' +
-                                '<strong>Costo total:</strong> $' +
+                                '<strong>Costo total de la receta:</strong> $' +
                                 costoTotal.toLocaleString(
                                     "es-AR",
                                     {
