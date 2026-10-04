@@ -1,0 +1,235 @@
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #f1f1f1;
+        }
+
+        header {
+            background: #1c1c1c;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            min-height: 75px;
+            background: #1e1e1e;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .menu button.activo {
+            background: #383838;
+            border-color: #666;
+        }
+
+        .seccion {
+            display: none;
+        }
+
+        .seccion.activa {
+            display: block;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        .boton-nuevo {
+            margin-bottom: 20px;
+            background: #3a3a3a;
+            font-size: 17px;
+        }
+
+        .formulario-oculto {
+            display: none;
+        }
+
+        .formulario-visible {
+            display: block;
+        }
+
+        .form {
+            display: grid;
+            gap: 12px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid #444;
+            font-size: 16px;
+        }
+
+        input,
+        select {
+            background: #292929;
+            color: white;
+        }
+
+        button {
+            background: #3a3a3a;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .boton-cancelar {
+            background: #555;
+        }
+
+        .insumo,
+        .compra,
+        .ingrediente,
+        .receta,
+        .producto,
+        .produccion,
+        .venta {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .insumo-nombre,
+        .compra-nombre,
+        .receta-nombre,
+        .producto-nombre,
+        .produccion-nombre,
+        .venta-nombre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .insumo-dato,
+        .compra-dato,
+        .ingrediente-dato,
+        .receta-dato,
+        .producto-dato,
+        .produccion-dato,
+        .venta-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .boton-modificar {
+            background: #555;
+        }
+
+        .boton-eliminar {
+            background: #702020;
+        }
+
+        .costo-receta,
+        .producto-costo,
+        .produccion-insumos,
+        .venta-total {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #444;
+        }
+
+        .rendimiento-info {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .rendimiento-info label {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .rendimiento-info input {
+            margin-bottom: 6px;
+        }
+
+        .rendimiento-ayuda {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .produccion-insumo {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .produccion-resumen,
+        .venta-resumen {
+            background: #292929;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .produccion-resumen-titulo,
+        .venta-resumen-titulo {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .produccion-resumen-dato,
+        .venta-resumen-dato {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .venta-total {
+            font-size: 18px;
+        }
+
+        .vacio {
+            color: #888;
+            text-align: center;
+            padding: 15px;
+        }
