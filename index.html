@@ -42,10 +42,6 @@
             padding: 20px;
         }
 
-        /* =========================
-           MENU
-        ========================= */
-
         .menu {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -67,10 +63,6 @@
             border-color: #666;
         }
 
-        /* =========================
-           SECCIONES
-        ========================= */
-
         .seccion {
             display: none;
         }
@@ -78,10 +70,6 @@
         .seccion.activa {
             display: block;
         }
-
-        /* =========================
-           TARJETAS
-        ========================= */
 
         .card {
             background: #1e1e1e;
@@ -95,19 +83,11 @@
             margin-bottom: 15px;
         }
 
-        /* =========================
-           BOTON NUEVO
-        ========================= */
-
         .boton-nuevo {
             margin-bottom: 20px;
             background: #3a3a3a;
             font-size: 17px;
         }
-
-        /* =========================
-           FORMULARIOS
-        ========================= */
 
         .formulario-oculto {
             display: none;
@@ -149,11 +129,13 @@
             background: #555;
         }
 
-        /* =========================
-           INSUMOS
-        ========================= */
-
-        .insumo {
+        .insumo,
+        .compra,
+        .ingrediente,
+        .receta,
+        .producto,
+        .produccion,
+        .venta {
             background: #292929;
             border: 1px solid #444;
             border-radius: 10px;
@@ -161,12 +143,23 @@
             margin-bottom: 10px;
         }
 
-        .insumo-nombre {
+        .insumo-nombre,
+        .compra-nombre,
+        .receta-nombre,
+        .producto-nombre,
+        .produccion-nombre,
+        .venta-nombre {
             font-size: 18px;
             font-weight: bold;
         }
 
-        .insumo-dato {
+        .insumo-dato,
+        .compra-dato,
+        .ingrediente-dato,
+        .receta-dato,
+        .producto-dato,
+        .produccion-dato,
+        .venta-dato {
             color: #aaa;
             font-size: 14px;
             margin-top: 6px;
@@ -187,71 +180,10 @@
             background: #702020;
         }
 
-        /* =========================
-           COMPRAS
-        ========================= */
-
-        .compra {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        .compra-nombre {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .compra-dato {
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        /* =========================
-           RECETAS
-        ========================= */
-
-        .ingrediente {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 8px;
-        }
-
-        .ingrediente-nombre {
-            font-weight: bold;
-        }
-
-        .ingrediente-dato {
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .receta {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        .receta-nombre {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .receta-dato {
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        .costo-receta {
+        .costo-receta,
+        .producto-costo,
+        .produccion-insumos,
+        .venta-total {
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid #444;
@@ -281,103 +213,36 @@
             font-size: 13px;
         }
 
-        /* =========================
-           PRODUCTOS
-        ========================= */
-
-        .producto {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        .producto-nombre {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .producto-dato {
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        .producto-costo {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #444;
-        }
-
-        /* =========================
-           PRODUCCION
-        ========================= */
-
-        .produccion {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        .produccion-nombre {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .produccion-dato {
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        .produccion-insumos {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #444;
-        }
-
         .produccion-insumo {
             color: #aaa;
             font-size: 14px;
             margin-top: 5px;
         }
 
-        .produccion-resumen {
+        .produccion-resumen,
+        .venta-resumen {
             background: #292929;
             border: 1px solid #444;
             border-radius: 10px;
             padding: 15px;
         }
 
-        .produccion-resumen-titulo {
+        .produccion-resumen-titulo,
+        .venta-resumen-titulo {
             font-weight: bold;
             margin-bottom: 8px;
         }
 
-        .produccion-resumen-dato {
+        .produccion-resumen-dato,
+        .venta-resumen-dato {
             color: #aaa;
             font-size: 14px;
             margin-top: 5px;
         }
 
-        /* =========================
-           VENTAS
-        ========================= */
-
-        .venta {
-            background: #292929;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
+        .venta-total {
+            font-size: 18px;
         }
-
-        /* =========================
-           VACIO
-        ========================= */
 
         .vacio {
             color: #888;
@@ -405,14 +270,9 @@
     <main>
 
 
-        <!-- =========================
-             MENU
-        ========================= -->
-
         <div class="menu">
 
             <button
-                id="botonInsumos"
                 class="activo"
                 onclick="mostrarSeccion('insumos', this)"
             >
@@ -885,7 +745,6 @@
                             placeholder="Nombre del producto"
                         >
 
-
                         <select id="recetaProducto">
 
                             <option value="">
@@ -893,7 +752,6 @@
                             </option>
 
                         </select>
-
 
                         <input
                             id="pesoProducto"
@@ -903,7 +761,6 @@
                             placeholder="Peso por unidad (g)"
                         >
 
-
                         <input
                             id="diametroProducto"
                             type="number"
@@ -911,7 +768,6 @@
                             step="0.01"
                             placeholder="Diámetro (cm)"
                         >
-
 
                         <input
                             id="precioProducto"
@@ -921,10 +777,8 @@
                             placeholder="Precio de venta"
                         >
 
-
                         <div id="costoProductoFormulario">
                         </div>
-
 
                         <button
                             id="botonGuardarProducto"
@@ -933,7 +787,6 @@
                         >
                             Crear producto
                         </button>
-
 
                         <button
                             id="botonCancelarProducto"
@@ -1012,7 +865,6 @@
 
                         </select>
 
-
                         <input
                             id="cantidadProduccion"
                             type="number"
@@ -1022,12 +874,8 @@
                             oninput="mostrarResumenProduccion()"
                         >
 
-
-                        <div
-                            id="resumenProduccion"
-                        >
+                        <div id="resumenProduccion">
                         </div>
-
 
                         <button
                             type="button"
@@ -1035,7 +883,6 @@
                         >
                             Registrar producción
                         </button>
-
 
                         <button
                             type="button"
@@ -1082,7 +929,7 @@
 
             <button
                 class="boton-nuevo"
-                onclick="mostrarFormulario('formularioVenta')"
+                onclick="abrirFormularioVenta()"
             >
                 + Nueva venta
             </button>
@@ -1101,25 +948,46 @@
 
                     <div class="form">
 
-                        <input
-                            type="text"
-                            placeholder="Producto"
+                        <select
+                            id="productoVenta"
+                            onchange="mostrarResumenVenta()"
                         >
 
+                            <option value="">
+                                Seleccionar producto
+                            </option>
+
+                        </select>
+
+
                         <input
+                            id="cantidadVenta"
                             type="number"
                             min="1"
-                            placeholder="Cantidad"
+                            step="1"
+                            placeholder="Cantidad vendida"
+                            oninput="mostrarResumenVenta()"
                         >
 
-                        <button type="button">
+
+                        <div
+                            id="resumenVenta"
+                        >
+                        </div>
+
+
+                        <button
+                            type="button"
+                            onclick="registrarVenta()"
+                        >
                             Registrar venta
                         </button>
+
 
                         <button
                             type="button"
                             class="boton-cancelar"
-                            onclick="ocultarFormulario('formularioVenta')"
+                            onclick="cancelarVenta()"
                         >
                             Cancelar
                         </button>
@@ -1137,8 +1005,12 @@
                     Ventas
                 </h2>
 
-                <div class="vacio">
-                    Todavía no hay ventas
+                <div id="listaVentas">
+
+                    <div class="vacio">
+                        Todavía no hay ventas
+                    </div>
+
                 </div>
 
             </div>
@@ -1183,6 +1055,12 @@
         var producciones =
             JSON.parse(
                 localStorage.getItem("producciones")
+            ) || [];
+
+
+        var ventas =
+            JSON.parse(
+                localStorage.getItem("ventas")
             ) || [];
 
 
@@ -1293,6 +1171,16 @@
         }
 
 
+        function guardarVentas() {
+
+            localStorage.setItem(
+                "ventas",
+                JSON.stringify(ventas)
+            );
+
+        }
+
+
         /* =========================
            CAMBIAR SECCIÓN
         ========================= */
@@ -1375,6 +1263,15 @@
                 actualizarProductosDisponiblesProduccion();
 
                 mostrarProducciones();
+
+            }
+
+
+            if (nombre === "ventas") {
+
+                actualizarProductosDisponiblesVenta();
+
+                mostrarVentas();
 
             }
 
@@ -1467,6 +1364,8 @@
             actualizarListaCompras();
 
             actualizarIngredientesDisponibles();
+
+            mostrarResumenProduccion();
 
 
             ocultarFormulario(
@@ -1795,10 +1694,6 @@
         }
 
 
-        /* =========================
-           LIMPIAR FORMULARIO INSUMO
-        ========================= */
-
         function limpiarFormulario() {
 
             document
@@ -1907,7 +1802,7 @@
 
 
         /* =========================
-           LISTA PARA COMPRAS
+           COMPRAS
         ========================= */
 
         function actualizarListaCompras() {
@@ -1950,10 +1845,6 @@
         }
 
 
-        /* =========================
-           UNIDADES DE COMPRA
-        ========================= */
-
         function actualizarUnidadesCompra() {
 
             var selectInsumo =
@@ -1989,27 +1880,8 @@
             }
 
 
-            var insumo = null;
-
-
-            for (
-                var i = 0;
-                i < insumos.length;
-                i++
-            ) {
-
-                if (
-                    insumos[i].id === id
-                ) {
-
-                    insumo =
-                        insumos[i];
-
-                    break;
-
-                }
-
-            }
+            var insumo =
+                obtenerInsumo(id);
 
 
             if (!insumo) {
@@ -2065,10 +1937,6 @@
         }
 
 
-        /* =========================
-           CONVERTIR CANTIDAD
-        ========================= */
-
         function convertirCantidad(
             cantidad,
             unidadCompra,
@@ -2119,10 +1987,6 @@
 
         }
 
-
-        /* =========================
-           REGISTRAR COMPRA
-        ========================= */
 
         function registrarCompra() {
 
@@ -2201,27 +2065,8 @@
             }
 
 
-            var insumo = null;
-
-
-            for (
-                var i = 0;
-                i < insumos.length;
-                i++
-            ) {
-
-                if (
-                    insumos[i].id === id
-                ) {
-
-                    insumo =
-                        insumos[i];
-
-                    break;
-
-                }
-
-            }
+            var insumo =
+                obtenerInsumo(id);
 
 
             if (!insumo) {
@@ -2286,9 +2131,7 @@
             };
 
 
-            compras.push(
-                compra
-            );
+            compras.push(compra);
 
 
             guardarInsumos();
@@ -2327,10 +2170,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR COMPRAS
-        ========================= */
 
         function mostrarCompras() {
 
@@ -2402,7 +2241,7 @@
 
 
         /* =========================
-           INSUMOS PARA RECETAS
+           RECETAS
         ========================= */
 
         function actualizarIngredientesDisponibles() {
@@ -2462,10 +2301,6 @@
         }
 
 
-        /* =========================
-           UNIDADES DE INGREDIENTE
-        ========================= */
-
         function actualizarUnidadesIngrediente() {
 
             var selectInsumo =
@@ -2501,27 +2336,8 @@
             }
 
 
-            var insumo = null;
-
-
-            for (
-                var i = 0;
-                i < insumos.length;
-                i++
-            ) {
-
-                if (
-                    insumos[i].id === id
-                ) {
-
-                    insumo =
-                        insumos[i];
-
-                    break;
-
-                }
-
-            }
+            var insumo =
+                obtenerInsumo(id);
 
 
             if (!insumo) {
@@ -2576,10 +2392,6 @@
 
         }
 
-
-        /* =========================
-           AGREGAR INGREDIENTE
-        ========================= */
 
         function agregarIngrediente() {
 
@@ -2637,9 +2449,7 @@
 
 
             var insumo =
-                obtenerInsumo(
-                    insumoId
-                );
+                obtenerInsumo(insumoId);
 
 
             if (!insumo) {
@@ -2702,13 +2512,7 @@
         }
 
 
-        /* =========================
-           ELIMINAR INGREDIENTE
-        ========================= */
-
-        function eliminarIngrediente(
-            indice
-        ) {
+        function eliminarIngrediente(indice) {
 
             ingredientesReceta.splice(
                 indice,
@@ -2720,10 +2524,6 @@
 
         }
 
-
-        /* =========================
-           OBTENER INSUMO
-        ========================= */
 
         function obtenerInsumo(id) {
 
@@ -2748,10 +2548,6 @@
 
         }
 
-
-        /* =========================
-           COSTO DE INGREDIENTES
-        ========================= */
 
         function calcularCostoIngredientes(
             ingredientes
@@ -2801,10 +2597,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR INGREDIENTES
-        ========================= */
 
         function mostrarIngredientesReceta() {
 
@@ -2889,10 +2681,6 @@
         }
 
 
-        /* =========================
-           COSTO DEL FORMULARIO RECETA
-        ========================= */
-
         function mostrarCostoFormularioReceta() {
 
             var contenedor =
@@ -2963,10 +2751,6 @@
 
         }
 
-
-        /* =========================
-           CREAR RECETA
-        ========================= */
 
         function crearReceta() {
 
@@ -3046,9 +2830,7 @@
             };
 
 
-            recetas.push(
-                receta
-            );
+            recetas.push(receta);
 
 
             guardarRecetas();
@@ -3062,10 +2844,6 @@
 
         }
 
-
-        /* =========================
-           COPIAR INGREDIENTES
-        ========================= */
 
         function copiarIngredientes(
             ingredientes
@@ -3100,10 +2878,6 @@
 
         }
 
-
-        /* =========================
-           MODIFICAR RECETA
-        ========================= */
 
         function modificarReceta(id) {
 
@@ -3198,10 +2972,6 @@
 
         }
 
-
-        /* =========================
-           GUARDAR CAMBIOS RECETA
-        ========================= */
 
         function guardarCambiosReceta() {
 
@@ -3307,10 +3077,6 @@
         }
 
 
-        /* =========================
-           CANCELAR EDICIÓN RECETA
-        ========================= */
-
         function cancelarEdicionReceta() {
 
             recetaEditando =
@@ -3381,10 +3147,6 @@
         }
 
 
-        /* =========================
-           ELIMINAR RECETA
-        ========================= */
-
         function eliminarReceta(id) {
 
             var confirmar =
@@ -3433,10 +3195,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR RECETAS
-        ========================= */
 
         function mostrarRecetas() {
 
@@ -3597,13 +3355,8 @@
         }
 
 
-        /* ==================================================
-           PRODUCTOS
-        ================================================== */
-
-
         /* =========================
-           OBTENER RECETA
+           PRODUCTOS
         ========================= */
 
         function obtenerReceta(id) {
@@ -3629,11 +3382,6 @@
 
         }
 
-
-        /* =========================
-           ACTUALIZAR RECETAS
-           DISPONIBLES EN PRODUCTO
-        ========================= */
 
         function actualizarRecetasDisponiblesProducto() {
 
@@ -3691,10 +3439,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR COSTO PRODUCTO
-        ========================= */
 
         function mostrarCostoProductoFormulario() {
 
@@ -3767,10 +3511,6 @@
 
         }
 
-
-        /* =========================
-           CREAR PRODUCTO
-        ========================= */
 
         function crearProducto() {
 
@@ -3935,12 +3675,10 @@
 
             actualizarProductosDisponiblesProduccion();
 
+            actualizarProductosDisponiblesVenta();
+
         }
 
-
-        /* =========================
-           MODIFICAR PRODUCTO
-        ========================= */
 
         function modificarProducto(id) {
 
@@ -4046,10 +3784,6 @@
         }
 
 
-        /* =========================
-           OBTENER PRODUCTO
-        ========================= */
-
         function obtenerProducto(id) {
 
             for (
@@ -4073,10 +3807,6 @@
 
         }
 
-
-        /* =========================
-           GUARDAR CAMBIOS PRODUCTO
-        ========================= */
 
         function guardarCambiosProducto() {
 
@@ -4235,12 +3965,10 @@
 
             actualizarProductosDisponiblesProduccion();
 
+            actualizarProductosDisponiblesVenta();
+
         }
 
-
-        /* =========================
-           CANCELAR PRODUCTO
-        ========================= */
 
         function cancelarEdicionProducto() {
 
@@ -4333,10 +4061,6 @@
         }
 
 
-        /* =========================
-           ELIMINAR PRODUCTO
-        ========================= */
-
         function eliminarProducto(id) {
 
             var confirmar =
@@ -4378,12 +4102,10 @@
 
             actualizarProductosDisponiblesProduccion();
 
+            actualizarProductosDisponiblesVenta();
+
         }
 
-
-        /* =========================
-           MOSTRAR PRODUCTOS
-        ========================= */
 
         function mostrarProductos() {
 
@@ -4455,7 +4177,9 @@
 
 
                 var stockProducto =
-                    producto.stock || 0;
+                    Number(
+                        producto.stock || 0
+                    );
 
 
                 lista.innerHTML +=
@@ -4556,18 +4280,14 @@
         }
 
 
-        /* ==================================================
-           PRODUCCIÓN
-        ================================================== */
-
-
         /* =========================
-           ABRIR PRODUCCIÓN
+           PRODUCCIÓN
         ========================= */
 
         function abrirFormularioProduccion() {
 
             actualizarProductosDisponiblesProduccion();
+
 
             document
                 .getElementById(
@@ -4596,10 +4316,6 @@
 
         }
 
-
-        /* =========================
-           ACTUALIZAR PRODUCTOS
-        ========================= */
 
         function actualizarProductosDisponiblesProduccion() {
 
@@ -4657,10 +4373,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR RESUMEN
-        ========================= */
 
         function mostrarResumenProduccion() {
 
@@ -4868,10 +4580,6 @@
         }
 
 
-        /* =========================
-           REGISTRAR PRODUCCIÓN
-        ========================= */
-
         function registrarProduccion() {
 
             var productoId =
@@ -4957,14 +4665,6 @@
                 cantidad /
                 receta.rendimiento;
 
-
-            /*
-               Primero calculamos todo.
-
-               No modificamos ningún stock
-               hasta comprobar que todos
-               los insumos estén disponibles.
-            */
 
             var consumos = [];
 
@@ -5052,10 +4752,6 @@
             }
 
 
-            /*
-               Ahora sí modificamos los stocks.
-            */
-
             for (
                 var i = 0;
                 i < consumos.length;
@@ -5073,8 +4769,11 @@
 
 
                 insumo.stock =
-                    insumo.stock -
-                    consumo.cantidad;
+                    Math.max(
+                        0,
+                        insumo.stock -
+                        consumo.cantidad
+                    );
 
             }
 
@@ -5141,6 +4840,8 @@
 
             mostrarProducciones();
 
+            actualizarProductosDisponiblesVenta();
+
 
             document
                 .getElementById(
@@ -5169,10 +4870,6 @@
 
         }
 
-
-        /* =========================
-           MOSTRAR PRODUCCIONES
-        ========================= */
 
         function mostrarProducciones() {
 
@@ -5301,8 +4998,556 @@
         }
 
 
+        /* ==================================================
+           VENTAS
+        ================================================== */
+
+
+        function abrirFormularioVenta() {
+
+            actualizarProductosDisponiblesVenta();
+
+
+            document
+                .getElementById(
+                    "productoVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "cantidadVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "resumenVenta"
+                )
+                .innerHTML = "";
+
+
+            mostrarFormulario(
+                "formularioVenta"
+            );
+
+        }
+
+
+        function actualizarProductosDisponiblesVenta() {
+
+            var select =
+                document.getElementById(
+                    "productoVenta"
+                );
+
+
+            if (!select) {
+                return;
+            }
+
+
+            var valorActual =
+                select.value;
+
+
+            select.innerHTML =
+                '<option value="">' +
+                'Seleccionar producto' +
+                '</option>';
+
+
+            for (
+                var i = 0;
+                i < productos.length;
+                i++
+            ) {
+
+                var producto =
+                    productos[i];
+
+
+                select.innerHTML +=
+
+                    '<option value="' +
+                    producto.id +
+                    '">' +
+                    producto.nombre +
+                    '</option>';
+
+            }
+
+
+            if (valorActual !== "") {
+
+                select.value =
+                    valorActual;
+
+            }
+
+
+            mostrarResumenVenta();
+
+        }
+
+
+        function mostrarResumenVenta() {
+
+            var contenedor =
+                document.getElementById(
+                    "resumenVenta"
+                );
+
+
+            if (!contenedor) {
+                return;
+            }
+
+
+            var productoId =
+                Number(
+                    document.getElementById(
+                        "productoVenta"
+                    ).value
+                );
+
+
+            var cantidad =
+                Number(
+                    document.getElementById(
+                        "cantidadVenta"
+                    ).value
+                );
+
+
+            if (
+                !productoId ||
+                !cantidad ||
+                cantidad <= 0
+            ) {
+
+                contenedor.innerHTML = "";
+
+                return;
+
+            }
+
+
+            var producto =
+                obtenerProducto(
+                    productoId
+                );
+
+
+            if (!producto) {
+
+                contenedor.innerHTML = "";
+
+                return;
+
+            }
+
+
+            var stock =
+                Number(
+                    producto.stock || 0
+                );
+
+
+            var total =
+                cantidad *
+                producto.precioVenta;
+
+
+            var suficiente =
+                stock >= cantidad;
+
+
+            contenedor.innerHTML =
+
+                '<div class="venta-resumen">' +
+
+                    '<div class="venta-resumen-titulo">' +
+                        'Resumen de venta' +
+                    '</div>' +
+
+                    '<div class="venta-resumen-dato">' +
+                        'Producto: ' +
+                        producto.nombre +
+                    '</div>' +
+
+                    '<div class="venta-resumen-dato">' +
+                        'Stock disponible: ' +
+                        stock +
+                        ' unidades' +
+                    '</div>' +
+
+                    '<div class="venta-resumen-dato">' +
+                        'Cantidad: ' +
+                        cantidad +
+                        ' unidades' +
+                    '</div>' +
+
+                    '<div class="venta-resumen-dato">' +
+                        'Precio unitario: $' +
+                        producto.precioVenta.toLocaleString(
+                            "es-AR",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) +
+                    '</div>' +
+
+                    '<div class="venta-total">' +
+                        '<strong>Total: $' +
+                        total.toLocaleString(
+                            "es-AR",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) +
+                        '</strong>' +
+                    '</div>' +
+
+                    (
+                        suficiente
+                            ? ''
+                            :
+                            '<div class="venta-resumen-dato">' +
+                                '⚠ STOCK INSUFICIENTE' +
+                            '</div>'
+                    ) +
+
+                '</div>';
+
+        }
+
+
+        function registrarVenta() {
+
+            var productoId =
+                Number(
+                    document
+                        .getElementById(
+                            "productoVenta"
+                        )
+                        .value
+                );
+
+
+            var cantidad =
+                Number(
+                    document
+                        .getElementById(
+                            "cantidadVenta"
+                        )
+                        .value
+                );
+
+
+            if (!productoId) {
+
+                alert(
+                    "Seleccioná un producto"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !cantidad ||
+                cantidad <= 0
+            ) {
+
+                alert(
+                    "Ingresá una cantidad válida"
+                );
+
+                return;
+
+            }
+
+
+            var producto =
+                obtenerProducto(
+                    productoId
+                );
+
+
+            if (!producto) {
+
+                alert(
+                    "El producto no existe"
+                );
+
+                return;
+
+            }
+
+
+            var stock =
+                Number(
+                    producto.stock || 0
+                );
+
+
+            if (stock < cantidad) {
+
+                alert(
+                    "Stock insuficiente de " +
+                    producto.nombre +
+                    ". Tenés " +
+                    stock +
+                    " unidades y querés vender " +
+                    cantidad +
+                    "."
+                );
+
+                return;
+
+            }
+
+
+            var precioUnitario =
+                Number(
+                    producto.precioVenta
+                );
+
+
+            var total =
+                cantidad *
+                precioUnitario;
+
+
+            /*
+               Primero descontamos el stock.
+            */
+
+            producto.stock =
+                stock -
+                cantidad;
+
+
+            /*
+               Guardamos la venta como
+               un hecho histórico.
+
+               El precio unitario y el
+               total quedan guardados para
+               conservar el valor de la
+               venta aunque posteriormente
+               cambie el precio del producto.
+            */
+
+            var venta = {
+
+                id:
+                    Date.now(),
+
+                productoId:
+                    producto.id,
+
+                productoNombre:
+                    producto.nombre,
+
+                cantidad:
+                    cantidad,
+
+                precioUnitario:
+                    precioUnitario,
+
+                total:
+                    total,
+
+                fecha:
+                    new Date().toISOString()
+
+            };
+
+
+            ventas.push(
+                venta
+            );
+
+
+            guardarProductos();
+
+            guardarVentas();
+
+
+            mostrarProductos();
+
+            mostrarVentas();
+
+            actualizarProductosDisponiblesVenta();
+
+
+            document
+                .getElementById(
+                    "productoVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "cantidadVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "resumenVenta"
+                )
+                .innerHTML = "";
+
+
+            ocultarFormulario(
+                "formularioVenta"
+            );
+
+        }
+
+
+        function cancelarVenta() {
+
+            document
+                .getElementById(
+                    "productoVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "cantidadVenta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "resumenVenta"
+                )
+                .innerHTML = "";
+
+
+            ocultarFormulario(
+                "formularioVenta"
+            );
+
+        }
+
+
+        function mostrarVentas() {
+
+            var lista =
+                document.getElementById(
+                    "listaVentas"
+                );
+
+
+            if (!lista) {
+                return;
+            }
+
+
+            lista.innerHTML = "";
+
+
+            if (
+                ventas.length === 0
+            ) {
+
+                lista.innerHTML =
+                    '<div class="vacio">' +
+                    'Todavía no hay ventas' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            for (
+                var i = ventas.length - 1;
+                i >= 0;
+                i--
+            ) {
+
+                var venta =
+                    ventas[i];
+
+
+                var fecha =
+                    new Date(
+                        venta.fecha
+                    );
+
+
+                var fechaTexto =
+                    fecha.toLocaleString(
+                        "es-AR"
+                    );
+
+
+                lista.innerHTML +=
+
+                    '<div class="venta">' +
+
+                        '<div class="venta-nombre">' +
+                            venta.productoNombre +
+                        '</div>' +
+
+                        '<div class="venta-dato">' +
+                            '<strong>Cantidad:</strong> ' +
+                            venta.cantidad +
+                            ' unidades' +
+                        '</div>' +
+
+                        '<div class="venta-dato">' +
+                            '<strong>Precio unitario:</strong> $' +
+                            venta.precioUnitario.toLocaleString(
+                                "es-AR",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }
+                            ) +
+                        '</div>' +
+
+                        '<div class="venta-total">' +
+                            '<strong>Total:</strong> $' +
+                            venta.total.toLocaleString(
+                                "es-AR",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }
+                            ) +
+                        '</div>' +
+
+                        '<div class="venta-dato">' +
+                            '<strong>Fecha:</strong> ' +
+                            fechaTexto +
+                        '</div>' +
+
+                    '</div>';
+
+            }
+
+        }
+
+
         /* =========================
-           ACTUALIZAR COSTO RECETA
+           EVENTOS
         ========================= */
 
         document
@@ -5318,10 +5563,6 @@
                 }
             );
 
-
-        /* =========================
-           ACTUALIZAR COSTO PRODUCTO
-        ========================= */
 
         document
             .getElementById(
@@ -5358,6 +5599,10 @@
         actualizarProductosDisponiblesProduccion();
 
         mostrarProducciones();
+
+        actualizarProductosDisponiblesVenta();
+
+        mostrarVentas();
 
 
     </script>
