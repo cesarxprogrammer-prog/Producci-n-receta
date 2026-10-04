@@ -2,8 +2,13 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Producción</title>
 
@@ -91,6 +96,30 @@
 
         h2 {
             margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           BOTON NUEVO
+        ========================= */
+
+        .boton-nuevo {
+            margin-bottom: 20px;
+            background: #3a3a3a;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           FORMULARIOS
+        ========================= */
+
+        .formulario-oculto {
+            display: none;
+        }
+
+        .formulario-visible {
+            display: block;
         }
 
         .form {
@@ -278,8 +307,13 @@
 
 <body>
 
+
     <header>
-        <h1>Producción</h1>
+
+        <h1>
+            Producción
+        </h1>
+
     </header>
 
 
@@ -287,7 +321,7 @@
 
 
         <!-- =========================
-             MENU PRINCIPAL
+             MENU
         ========================= -->
 
         <div class="menu">
@@ -342,77 +376,93 @@
             class="seccion activa"
         >
 
-            <div class="card">
 
-                <h2 id="tituloFormulario">
-                    Nuevo insumo
-                </h2>
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioInsumo')"
+            >
+                + Nuevo insumo
+            </button>
 
-                <div class="form">
 
-                    <input
-                        id="nombre"
-                        type="text"
-                        placeholder="Nombre del insumo"
-                    >
+            <div
+                id="formularioInsumo"
+                class="formulario-oculto"
+            >
 
-                    <select id="unidad">
+                <div class="card">
 
-                        <option value="kg">
-                            Kilogramo (kg)
-                        </option>
+                    <h2 id="tituloFormulario">
+                        Nuevo insumo
+                    </h2>
 
-                        <option value="g">
-                            Gramo (g)
-                        </option>
+                    <div class="form">
 
-                        <option value="litro">
-                            Litro (L)
-                        </option>
+                        <input
+                            id="nombre"
+                            type="text"
+                            placeholder="Nombre del insumo"
+                        >
 
-                        <option value="ml">
-                            Mililitro (ml)
-                        </option>
+                        <select id="unidad">
 
-                        <option value="unidad">
-                            Unidad
-                        </option>
+                            <option value="kg">
+                                Kilogramo (kg)
+                            </option>
 
-                    </select>
+                            <option value="g">
+                                Gramo (g)
+                            </option>
 
-                    <input
-                        id="stock"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Stock"
-                    >
+                            <option value="litro">
+                                Litro (L)
+                            </option>
 
-                    <input
-                        id="costo"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Costo por unidad"
-                    >
+                            <option value="ml">
+                                Mililitro (ml)
+                            </option>
 
-                    <button
-                        id="botonGuardar"
-                        type="button"
-                        onclick="crearInsumo()"
-                    >
-                        Agregar insumo
-                    </button>
+                            <option value="unidad">
+                                Unidad
+                            </option>
 
-                    <button
-                        id="botonCancelar"
-                        type="button"
-                        class="boton-cancelar"
-                        onclick="cancelarEdicion()"
-                        style="display:none;"
-                    >
-                        Cancelar
-                    </button>
+                        </select>
+
+                        <input
+                            id="stock"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Stock"
+                        >
+
+                        <input
+                            id="costo"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Costo por unidad"
+                        >
+
+                        <button
+                            id="botonGuardar"
+                            type="button"
+                            onclick="crearInsumo()"
+                        >
+                            Agregar insumo
+                        </button>
+
+                        <button
+                            id="botonCancelar"
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="cancelarEdicion()"
+                            style="display:none;"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -447,50 +497,74 @@
             class="seccion"
         >
 
-            <div class="card">
 
-                <h2>
-                    Nueva compra
-                </h2>
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioCompra')"
+            >
+                + Nueva compra
+            </button>
 
-                <div class="form">
 
-                    <select
-                        id="compraInsumo"
-                        onchange="actualizarUnidadesCompra()"
-                    >
+            <div
+                id="formularioCompra"
+                class="formulario-oculto"
+            >
 
-                        <option value="">
-                            Seleccionar insumo
-                        </option>
+                <div class="card">
 
-                    </select>
+                    <h2>
+                        Nueva compra
+                    </h2>
 
-                    <input
-                        id="compraCantidad"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Cantidad comprada"
-                    >
+                    <div class="form">
 
-                    <select id="compraUnidad">
-                    </select>
+                        <select
+                            id="compraInsumo"
+                            onchange="actualizarUnidadesCompra()"
+                        >
 
-                    <input
-                        id="compraPrecio"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Precio total de la compra"
-                    >
+                            <option value="">
+                                Seleccionar insumo
+                            </option>
 
-                    <button
-                        type="button"
-                        onclick="registrarCompra()"
-                    >
-                        Registrar compra
-                    </button>
+                        </select>
+
+                        <input
+                            id="compraCantidad"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Cantidad comprada"
+                        >
+
+                        <select id="compraUnidad">
+                        </select>
+
+                        <input
+                            id="compraPrecio"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Precio total de la compra"
+                        >
+
+                        <button
+                            type="button"
+                            onclick="registrarCompra()"
+                        >
+                            Registrar compra
+                        </button>
+
+                        <button
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="ocultarFormulario('formularioCompra')"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -525,145 +599,162 @@
             class="seccion"
         >
 
-            <!-- DATOS GENERALES DE LA RECETA -->
 
-            <div class="card">
-
-                <h2 id="tituloFormularioReceta">
-                    Nueva receta
-                </h2>
-
-                <div class="form">
-
-                    <input
-                        id="nombreReceta"
-                        type="text"
-                        placeholder="Nombre de la receta"
-                    >
-
-                </div>
-
-            </div>
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioReceta')"
+            >
+                + Nueva receta
+            </button>
 
 
-            <!-- RENDIMIENTO DE TODA LA RECETA -->
+            <div
+                id="formularioReceta"
+                class="formulario-oculto"
+            >
 
-            <div class="card">
 
-                <h2>
-                    Rendimiento
-                </h2>
+                <!-- DATOS GENERALES -->
 
-                <div class="rendimiento-info">
+                <div class="card">
 
-                    <label for="rendimientoReceta">
-                        Esta receta produce:
-                    </label>
+                    <h2 id="tituloFormularioReceta">
+                        Nueva receta
+                    </h2>
 
-                    <input
-                        id="rendimientoReceta"
-                        type="number"
-                        min="1"
-                        step="1"
-                        placeholder="Cantidad de unidades"
-                    >
+                    <div class="form">
 
-                    <div class="rendimiento-ayuda">
-                        Todos los ingredientes agregados pertenecen a este mismo rendimiento.
+                        <input
+                            id="nombreReceta"
+                            type="text"
+                            placeholder="Nombre de la receta"
+                        >
+
                     </div>
 
                 </div>
 
-            </div>
+
+                <!-- RENDIMIENTO -->
+
+                <div class="card">
+
+                    <h2>
+                        Rendimiento
+                    </h2>
+
+                    <div class="rendimiento-info">
+
+                        <label for="rendimientoReceta">
+                            Esta receta produce:
+                        </label>
+
+                        <input
+                            id="rendimientoReceta"
+                            type="number"
+                            min="1"
+                            step="1"
+                            placeholder="Cantidad de unidades"
+                        >
+
+                        <div class="rendimiento-ayuda">
+                            Todos los ingredientes agregados pertenecen a este mismo rendimiento.
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-            <!-- INGREDIENTES -->
+                <!-- INGREDIENTES -->
 
-            <div class="card">
+                <div class="card">
 
-                <h2>
-                    Ingredientes de la receta
-                </h2>
+                    <h2>
+                        Ingredientes de la receta
+                    </h2>
 
-                <div class="form">
+                    <div class="form">
 
-                    <select
-                        id="ingredienteInsumo"
-                        onchange="actualizarUnidadesIngrediente()"
-                    >
+                        <select
+                            id="ingredienteInsumo"
+                            onchange="actualizarUnidadesIngrediente()"
+                        >
 
-                        <option value="">
-                            Seleccionar insumo
-                        </option>
+                            <option value="">
+                                Seleccionar insumo
+                            </option>
 
-                    </select>
+                        </select>
 
-                    <input
-                        id="ingredienteCantidad"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Cantidad"
-                    >
+                        <input
+                            id="ingredienteCantidad"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="Cantidad"
+                        >
 
-                    <select id="ingredienteUnidad">
-                    </select>
+                        <select id="ingredienteUnidad">
+                        </select>
+
+                        <button
+                            type="button"
+                            onclick="agregarIngrediente()"
+                        >
+                            Agregar ingrediente
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INGREDIENTES AGREGADOS -->
+
+                <div class="card">
+
+                    <h2>
+                        Ingredientes agregados
+                    </h2>
+
+                    <div id="listaIngredientesReceta">
+
+                        <div class="vacio">
+                            Todavía no hay ingredientes
+                        </div>
+
+                    </div>
+
+                    <div id="costoFormularioReceta">
+                    </div>
+
+                </div>
+
+
+                <!-- GUARDAR -->
+
+                <div class="card">
 
                     <button
+                        id="botonGuardarReceta"
                         type="button"
-                        onclick="agregarIngrediente()"
+                        onclick="crearReceta()"
                     >
-                        Agregar ingrediente
+                        Crear receta
+                    </button>
+
+                    <button
+                        id="botonCancelarReceta"
+                        type="button"
+                        class="boton-cancelar"
+                        onclick="cancelarEdicionReceta()"
+                        style="display:none;"
+                    >
+                        Cancelar
                     </button>
 
                 </div>
-
-            </div>
-
-
-            <!-- LISTA DE INGREDIENTES -->
-
-            <div class="card">
-
-                <h2>
-                    Ingredientes agregados
-                </h2>
-
-                <div id="listaIngredientesReceta">
-
-                    <div class="vacio">
-                        Todavía no hay ingredientes
-                    </div>
-
-                </div>
-
-                <div id="costoFormularioReceta">
-                </div>
-
-            </div>
-
-
-            <!-- GUARDAR RECETA -->
-
-            <div class="card">
-
-                <button
-                    id="botonGuardarReceta"
-                    type="button"
-                    onclick="crearReceta()"
-                >
-                    Crear receta
-                </button>
-
-                <button
-                    id="botonCancelarReceta"
-                    type="button"
-                    class="boton-cancelar"
-                    onclick="cancelarEdicionReceta()"
-                    style="display:none;"
-                >
-                    Cancelar
-                </button>
 
             </div>
 
@@ -698,6 +789,52 @@
             class="seccion"
         >
 
+
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioProducto')"
+            >
+                + Nuevo producto
+            </button>
+
+
+            <div
+                id="formularioProducto"
+                class="formulario-oculto"
+            >
+
+                <div class="card">
+
+                    <h2>
+                        Nuevo producto
+                    </h2>
+
+                    <div class="form">
+
+                        <input
+                            type="text"
+                            placeholder="Nombre del producto"
+                        >
+
+                        <button type="button">
+                            Crear producto
+                        </button>
+
+                        <button
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="ocultarFormulario('formularioProducto')"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
             <div class="card">
 
                 <h2>
@@ -705,7 +842,7 @@
                 </h2>
 
                 <div class="vacio">
-                    Próximamente
+                    Todavía no hay productos
                 </div>
 
             </div>
@@ -722,14 +859,66 @@
             class="seccion"
         >
 
+
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioProduccion')"
+            >
+                + Nueva producción
+            </button>
+
+
+            <div
+                id="formularioProduccion"
+                class="formulario-oculto"
+            >
+
+                <div class="card">
+
+                    <h2>
+                        Nueva producción
+                    </h2>
+
+                    <div class="form">
+
+                        <input
+                            type="text"
+                            placeholder="Producto"
+                        >
+
+                        <input
+                            type="number"
+                            min="1"
+                            placeholder="Cantidad"
+                        >
+
+                        <button type="button">
+                            Registrar producción
+                        </button>
+
+                        <button
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="ocultarFormulario('formularioProduccion')"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
             <div class="card">
 
                 <h2>
-                    Producción
+                    Producciones
                 </h2>
 
                 <div class="vacio">
-                    Próximamente
+                    Todavía no hay producciones
                 </div>
 
             </div>
@@ -746,6 +935,58 @@
             class="seccion"
         >
 
+
+            <button
+                class="boton-nuevo"
+                onclick="mostrarFormulario('formularioVenta')"
+            >
+                + Nueva venta
+            </button>
+
+
+            <div
+                id="formularioVenta"
+                class="formulario-oculto"
+            >
+
+                <div class="card">
+
+                    <h2>
+                        Nueva venta
+                    </h2>
+
+                    <div class="form">
+
+                        <input
+                            type="text"
+                            placeholder="Producto"
+                        >
+
+                        <input
+                            type="number"
+                            min="1"
+                            placeholder="Cantidad"
+                        >
+
+                        <button type="button">
+                            Registrar venta
+                        </button>
+
+                        <button
+                            type="button"
+                            class="boton-cancelar"
+                            onclick="ocultarFormulario('formularioVenta')"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
             <div class="card">
 
                 <h2>
@@ -753,7 +994,7 @@
                 </h2>
 
                 <div class="vacio">
-                    Próximamente
+                    Todavía no hay ventas
                 </div>
 
             </div>
@@ -794,6 +1035,50 @@
         var recetaEditando = null;
 
         var ingredientesReceta = [];
+
+
+        /* =========================
+           FORMULARIOS
+        ========================= */
+
+        function mostrarFormulario(id) {
+
+            var formulario =
+                document.getElementById(id);
+
+            if (!formulario) {
+                return;
+            }
+
+            formulario.classList.remove(
+                "formulario-oculto"
+            );
+
+            formulario.classList.add(
+                "formulario-visible"
+            );
+
+        }
+
+
+        function ocultarFormulario(id) {
+
+            var formulario =
+                document.getElementById(id);
+
+            if (!formulario) {
+                return;
+            }
+
+            formulario.classList.remove(
+                "formulario-visible"
+            );
+
+            formulario.classList.add(
+                "formulario-oculto"
+            );
+
+        }
 
 
         /* =========================
@@ -845,30 +1130,49 @@
         function mostrarSeccion(nombre, boton) {
 
             var secciones =
-                document.getElementsByClassName("seccion");
+                document.getElementsByClassName(
+                    "seccion"
+                );
 
 
-            for (var i = 0; i < secciones.length; i++) {
+            for (
+                var i = 0;
+                i < secciones.length;
+                i++
+            ) {
 
-                secciones[i].classList.remove("activa");
+                secciones[i]
+                    .classList
+                    .remove("activa");
 
             }
 
 
             var botones =
-                document.querySelectorAll(".menu button");
+                document.querySelectorAll(
+                    ".menu button"
+                );
 
 
-            for (var i = 0; i < botones.length; i++) {
+            for (
+                var i = 0;
+                i < botones.length;
+                i++
+            ) {
 
-                botones[i].classList.remove("activo");
+                botones[i]
+                    .classList
+                    .remove("activo");
 
             }
 
 
             document
-                .getElementById("seccion-" + nombre)
-                .classList.add("activa");
+                .getElementById(
+                    "seccion-" + nombre
+                )
+                .classList
+                .add("activa");
 
 
             boton.classList.add("activo");
@@ -976,6 +1280,11 @@
 
             actualizarIngredientesDisponibles();
 
+
+            ocultarFormulario(
+                "formularioInsumo"
+            );
+
         }
 
 
@@ -985,9 +1294,20 @@
 
         function modificarInsumo(id) {
 
-            for (var i = 0; i < insumos.length; i++) {
+            mostrarFormulario(
+                "formularioInsumo"
+            );
 
-                if (insumos[i].id === id) {
+
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
+
+                if (
+                    insumos[i].id === id
+                ) {
 
                     var insumo =
                         insumos[i];
@@ -1017,7 +1337,8 @@
                         insumo.costo;
 
 
-                    insumoEditando = id;
+                    insumoEditando =
+                        id;
 
 
                     document
@@ -1042,7 +1363,9 @@
                         )
                         .onclick =
                         function () {
+
                             guardarCambios();
+
                         };
 
 
@@ -1121,7 +1444,11 @@
             }
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
                 if (
                     insumos[i].id ===
@@ -1176,17 +1503,24 @@
 
 
             if (!confirmar) {
-
                 return;
-
             }
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
-                if (insumos[i].id === id) {
+                if (
+                    insumos[i].id === id
+                ) {
 
-                    insumos.splice(i, 1);
+                    insumos.splice(
+                        i,
+                        1
+                    );
 
                     break;
 
@@ -1215,7 +1549,9 @@
 
         function cancelarEdicion() {
 
-            insumoEditando = null;
+            insumoEditando =
+                null;
+
 
             limpiarFormulario();
 
@@ -1242,7 +1578,9 @@
                 )
                 .onclick =
                 function () {
+
                     crearInsumo();
+
                 };
 
 
@@ -1252,6 +1590,11 @@
                 )
                 .style.display =
                 "none";
+
+
+            ocultarFormulario(
+                "formularioInsumo"
+            );
 
         }
 
@@ -1306,7 +1649,11 @@
             }
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
                 var insumo =
                     insumos[i];
@@ -1364,8 +1711,7 @@
 
 
         /* =========================
-           LISTA DE INSUMOS
-           PARA COMPRAS
+           LISTA PARA COMPRAS
         ========================= */
 
         function actualizarListaCompras() {
@@ -1382,7 +1728,11 @@
                 '</option>';
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
                 var insumo =
                     insumos[i];
@@ -1446,9 +1796,15 @@
             var insumo = null;
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
-                if (insumos[i].id === id) {
+                if (
+                    insumos[i].id === id
+                ) {
 
                     insumo =
                         insumos[i];
@@ -1461,9 +1817,7 @@
 
 
             if (!insumo) {
-
                 return;
-
             }
 
 
@@ -1475,7 +1829,9 @@
 
             }
 
-            else if (insumo.unidad === "kg") {
+            else if (
+                insumo.unidad === "kg"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="kg">Kilogramos (kg)</option>' +
@@ -1483,7 +1839,9 @@
 
             }
 
-            else if (insumo.unidad === "ml") {
+            else if (
+                insumo.unidad === "ml"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="ml">Mililitros (ml)</option>' +
@@ -1491,7 +1849,9 @@
 
             }
 
-            else if (insumo.unidad === "litro") {
+            else if (
+                insumo.unidad === "litro"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="litro">Litros (L)</option>' +
@@ -1622,7 +1982,9 @@
                 cantidad <= 0
             ) {
 
-                alert("Ingresá una cantidad válida");
+                alert(
+                    "Ingresá una cantidad válida"
+                );
 
                 return;
 
@@ -1634,7 +1996,9 @@
                 precio <= 0
             ) {
 
-                alert("Ingresá el precio de la compra");
+                alert(
+                    "Ingresá el precio de la compra"
+                );
 
                 return;
 
@@ -1644,9 +2008,15 @@
             var insumo = null;
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
-                if (insumos[i].id === id) {
+                if (
+                    insumos[i].id === id
+                ) {
 
                     insumo =
                         insumos[i];
@@ -1660,7 +2030,9 @@
 
             if (!insumo) {
 
-                alert("El insumo no existe");
+                alert(
+                    "El insumo no existe"
+                );
 
                 return;
 
@@ -1691,7 +2063,8 @@
 
             var compra = {
 
-                id: Date.now(),
+                id:
+                    Date.now(),
 
                 insumoId:
                     insumo.id,
@@ -1717,7 +2090,9 @@
             };
 
 
-            compras.push(compra);
+            compras.push(
+                compra
+            );
 
 
             guardarInsumos();
@@ -1744,6 +2119,11 @@
             mostrarCompras();
 
             mostrarRecetas();
+
+
+            ocultarFormulario(
+                "formularioCompra"
+            );
 
         }
 
@@ -1775,7 +2155,11 @@
             }
 
 
-            for (var i = 0; i < compras.length; i++) {
+            for (
+                var i = 0;
+                i < compras.length;
+                i++
+            ) {
 
                 var compra =
                     compras[i];
@@ -1818,7 +2202,7 @@
 
 
         /* =========================
-           RECETAS
+           INSUMOS PARA RECETAS
         ========================= */
 
         function actualizarIngredientesDisponibles() {
@@ -1830,9 +2214,7 @@
 
 
             if (!select) {
-
                 return;
-
             }
 
 
@@ -1846,7 +2228,11 @@
                 '</option>';
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
                 var insumo =
                     insumos[i];
@@ -1918,9 +2304,15 @@
             var insumo = null;
 
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
-                if (insumos[i].id === id) {
+                if (
+                    insumos[i].id === id
+                ) {
 
                     insumo =
                         insumos[i];
@@ -1933,9 +2325,7 @@
 
 
             if (!insumo) {
-
                 return;
-
             }
 
 
@@ -1947,7 +2337,9 @@
 
             }
 
-            else if (insumo.unidad === "kg") {
+            else if (
+                insumo.unidad === "kg"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="kg">Kilogramos (kg)</option>' +
@@ -1955,7 +2347,9 @@
 
             }
 
-            else if (insumo.unidad === "ml") {
+            else if (
+                insumo.unidad === "ml"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="ml">Mililitros (ml)</option>' +
@@ -1963,7 +2357,9 @@
 
             }
 
-            else if (insumo.unidad === "litro") {
+            else if (
+                insumo.unidad === "litro"
+            ) {
 
                 selectUnidad.innerHTML =
                     '<option value="litro">Litros (L)</option>' +
@@ -2017,7 +2413,9 @@
 
             if (!insumoId) {
 
-                alert("Seleccioná un insumo");
+                alert(
+                    "Seleccioná un insumo"
+                );
 
                 return;
 
@@ -2029,7 +2427,9 @@
                 cantidad <= 0
             ) {
 
-                alert("Ingresá una cantidad válida");
+                alert(
+                    "Ingresá una cantidad válida"
+                );
 
                 return;
 
@@ -2044,7 +2444,9 @@
 
             if (!insumo) {
 
-                alert("El insumo no existe");
+                alert(
+                    "El insumo no existe"
+                );
 
                 return;
 
@@ -2058,7 +2460,8 @@
             ) {
 
                 if (
-                    ingredientesReceta[i].insumoId ===
+                    ingredientesReceta[i]
+                        .insumoId ===
                     insumoId
                 ) {
 
@@ -2103,7 +2506,9 @@
            ELIMINAR INGREDIENTE
         ========================= */
 
-        function eliminarIngrediente(indice) {
+        function eliminarIngrediente(
+            indice
+        ) {
 
             ingredientesReceta.splice(
                 indice,
@@ -2122,9 +2527,15 @@
 
         function obtenerInsumo(id) {
 
-            for (var i = 0; i < insumos.length; i++) {
+            for (
+                var i = 0;
+                i < insumos.length;
+                i++
+            ) {
 
-                if (insumos[i].id === id) {
+                if (
+                    insumos[i].id === id
+                ) {
 
                     return insumos[i];
 
@@ -2149,7 +2560,11 @@
             var total = 0;
 
 
-            for (var i = 0; i < ingredientes.length; i++) {
+            for (
+                var i = 0;
+                i < ingredientes.length;
+                i++
+            ) {
 
                 var ingrediente =
                     ingredientes[i];
@@ -2162,9 +2577,7 @@
 
 
                 if (!insumo) {
-
                     continue;
-
                 }
 
 
@@ -2303,6 +2716,7 @@
 
 
             var texto =
+
                 '<div class="costo-receta">' +
 
                     '<div class="receta-dato">' +
@@ -2415,7 +2829,8 @@
 
             var receta = {
 
-                id: Date.now(),
+                id:
+                    Date.now(),
 
                 nombre:
                     nombre,
@@ -2457,7 +2872,11 @@
             var copia = [];
 
 
-            for (var i = 0; i < ingredientes.length; i++) {
+            for (
+                var i = 0;
+                i < ingredientes.length;
+                i++
+            ) {
 
                 copia.push({
 
@@ -2486,9 +2905,20 @@
 
         function modificarReceta(id) {
 
-            for (var i = 0; i < recetas.length; i++) {
+            mostrarFormulario(
+                "formularioReceta"
+            );
 
-                if (recetas[i].id === id) {
+
+            for (
+                var i = 0;
+                i < recetas.length;
+                i++
+            ) {
+
+                if (
+                    recetas[i].id === id
+                ) {
 
                     var receta =
                         recetas[i];
@@ -2542,7 +2972,9 @@
                         )
                         .onclick =
                         function () {
+
                             guardarCambiosReceta();
+
                         };
 
 
@@ -2628,7 +3060,11 @@
             }
 
 
-            for (var i = 0; i < recetas.length; i++) {
+            for (
+                var i = 0;
+                i < recetas.length;
+                i++
+            ) {
 
                 if (
                     recetas[i].id ===
@@ -2713,7 +3149,9 @@
                 )
                 .onclick =
                 function () {
+
                     crearReceta();
+
                 };
 
 
@@ -2726,6 +3164,11 @@
 
 
             mostrarIngredientesReceta();
+
+
+            ocultarFormulario(
+                "formularioReceta"
+            );
 
         }
 
@@ -2743,15 +3186,19 @@
 
 
             if (!confirmar) {
-
                 return;
-
             }
 
 
-            for (var i = 0; i < recetas.length; i++) {
+            for (
+                var i = 0;
+                i < recetas.length;
+                i++
+            ) {
 
-                if (recetas[i].id === id) {
+                if (
+                    recetas[i].id === id
+                ) {
 
                     recetas.splice(
                         i,
@@ -2786,9 +3233,7 @@
 
 
             if (!lista) {
-
                 return;
-
             }
 
 
@@ -2807,7 +3252,11 @@
             }
 
 
-            for (var i = 0; i < recetas.length; i++) {
+            for (
+                var i = 0;
+                i < recetas.length;
+                i++
+            ) {
 
                 var receta =
                     recetas[i];
@@ -2936,7 +3385,6 @@
 
         /* =========================
            ACTUALIZAR COSTO
-           AL CAMBIAR RENDIMIENTO
         ========================= */
 
         document
