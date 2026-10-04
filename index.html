@@ -37,6 +37,7 @@
             padding: 20px;
         }
 
+
         /* =========================
            MENU
         ========================= */
@@ -62,6 +63,7 @@
             border-color: #666;
         }
 
+
         /* =========================
            SECCIONES
         ========================= */
@@ -73,6 +75,7 @@
         .seccion.activa {
             display: block;
         }
+
 
         /* =========================
            TARJETAS
@@ -122,6 +125,7 @@
             background: #555;
         }
 
+
         /* =========================
            INSUMOS
         ========================= */
@@ -160,6 +164,7 @@
             background: #702020;
         }
 
+
         /* =========================
            COMPRAS
         ========================= */
@@ -182,6 +187,7 @@
             font-size: 14px;
             margin-top: 6px;
         }
+
 
         /* =========================
            RECETAS
@@ -230,6 +236,7 @@
             border-top: 1px solid #444;
         }
 
+
         /* =========================
            VACIO
         ========================= */
@@ -253,6 +260,7 @@
 
 
     <main>
+
 
         <!-- =========================
              MENU PRINCIPAL
@@ -434,7 +442,6 @@
 
                     </select>
 
-
                     <input
                         id="compraCantidad"
                         type="number"
@@ -443,10 +450,8 @@
                         placeholder="Cantidad comprada"
                     >
 
-
                     <select id="compraUnidad">
                     </select>
-
 
                     <input
                         id="compraPrecio"
@@ -455,7 +460,6 @@
                         step="0.01"
                         placeholder="Precio total de la compra"
                     >
-
 
                     <button
                         type="button"
@@ -686,26 +690,82 @@
 
         </section>
 
+
     </main>
 
 
     <script>
 
+
         /* =========================
-           DATOS
+           DATOS DESDE STORAGE
         ========================= */
 
-        var insumos = [];
+        var insumos =
+            JSON.parse(
+                localStorage.getItem("insumos")
+            ) || [];
 
-        var compras = [];
 
-        var recetas = [];
+        var compras =
+            JSON.parse(
+                localStorage.getItem("compras")
+            ) || [];
+
+
+        var recetas =
+            JSON.parse(
+                localStorage.getItem("recetas")
+            ) || [];
+
 
         var insumoEditando = null;
 
         var recetaEditando = null;
 
         var ingredientesReceta = [];
+
+
+        /* =========================
+           GUARDAR INSUMOS
+        ========================= */
+
+        function guardarInsumos() {
+
+            localStorage.setItem(
+                "insumos",
+                JSON.stringify(insumos)
+            );
+
+        }
+
+
+        /* =========================
+           GUARDAR COMPRAS
+        ========================= */
+
+        function guardarCompras() {
+
+            localStorage.setItem(
+                "compras",
+                JSON.stringify(compras)
+            );
+
+        }
+
+
+        /* =========================
+           GUARDAR RECETAS
+        ========================= */
+
+        function guardarRecetas() {
+
+            localStorage.setItem(
+                "recetas",
+                JSON.stringify(recetas)
+            );
+
+        }
 
 
         /* =========================
@@ -766,16 +826,28 @@
         function crearInsumo() {
 
             var nombre =
-                document.getElementById("nombre").value.trim();
+                document
+                    .getElementById("nombre")
+                    .value
+                    .trim();
+
 
             var unidad =
-                document.getElementById("unidad").value;
+                document
+                    .getElementById("unidad")
+                    .value;
+
 
             var stock =
-                document.getElementById("stock").value;
+                document
+                    .getElementById("stock")
+                    .value;
+
 
             var costo =
-                document.getElementById("costo").value;
+                document
+                    .getElementById("costo")
+                    .value;
 
 
             if (nombre === "") {
@@ -823,6 +895,9 @@
             insumos.push(insumo);
 
 
+            guardarInsumos();
+
+
             limpiarFormulario();
 
             mostrarInsumos();
@@ -844,40 +919,68 @@
 
                 if (insumos[i].id === id) {
 
-                    var insumo = insumos[i];
+                    var insumo =
+                        insumos[i];
 
 
-                    document.getElementById("nombre").value =
+                    document
+                        .getElementById("nombre")
+                        .value =
                         insumo.nombre;
 
-                    document.getElementById("unidad").value =
+
+                    document
+                        .getElementById("unidad")
+                        .value =
                         insumo.unidad;
 
-                    document.getElementById("stock").value =
+
+                    document
+                        .getElementById("stock")
+                        .value =
                         insumo.stock;
 
-                    document.getElementById("costo").value =
+
+                    document
+                        .getElementById("costo")
+                        .value =
                         insumo.costo;
 
 
                     insumoEditando = id;
 
 
-                    document.getElementById("tituloFormulario").innerText =
+                    document
+                        .getElementById(
+                            "tituloFormulario"
+                        )
+                        .innerText =
                         "Modificar insumo";
 
 
-                    document.getElementById("botonGuardar").innerText =
+                    document
+                        .getElementById(
+                            "botonGuardar"
+                        )
+                        .innerText =
                         "Guardar cambios";
 
 
-                    document.getElementById("botonGuardar").onclick =
+                    document
+                        .getElementById(
+                            "botonGuardar"
+                        )
+                        .onclick =
                         function () {
                             guardarCambios();
                         };
 
 
-                    document.getElementById("botonCancelar").style.display =
+                    document
+                        .getElementById(
+                            "botonCancelar"
+                        )
+                        .style.display =
                         "block";
 
 
@@ -897,16 +1000,28 @@
         function guardarCambios() {
 
             var nombre =
-                document.getElementById("nombre").value.trim();
+                document
+                    .getElementById("nombre")
+                    .value
+                    .trim();
+
 
             var unidad =
-                document.getElementById("unidad").value;
+                document
+                    .getElementById("unidad")
+                    .value;
+
 
             var stock =
-                document.getElementById("stock").value;
+                document
+                    .getElementById("stock")
+                    .value;
+
 
             var costo =
-                document.getElementById("costo").value;
+                document
+                    .getElementById("costo")
+                    .value;
 
 
             if (nombre === "") {
@@ -938,21 +1053,31 @@
 
             for (var i = 0; i < insumos.length; i++) {
 
-                if (insumos[i].id === insumoEditando) {
+                if (
+                    insumos[i].id ===
+                    insumoEditando
+                ) {
 
-                    insumos[i].nombre = nombre;
+                    insumos[i].nombre =
+                        nombre;
 
-                    insumos[i].unidad = unidad;
+                    insumos[i].unidad =
+                        unidad;
 
-                    insumos[i].stock = Number(stock);
+                    insumos[i].stock =
+                        Number(stock);
 
-                    insumos[i].costo = Number(costo);
+                    insumos[i].costo =
+                        Number(costo);
 
                     break;
 
                 }
 
             }
+
+
+            guardarInsumos();
 
 
             cancelarEdicion();
@@ -975,7 +1100,9 @@
         function eliminarInsumo(id) {
 
             var confirmar =
-                confirm("¿Querés eliminar este insumo?");
+                confirm(
+                    "¿Querés eliminar este insumo?"
+                );
 
 
             if (!confirmar) {
@@ -996,6 +1123,9 @@
                 }
 
             }
+
+
+            guardarInsumos();
 
 
             mostrarInsumos();
@@ -1020,21 +1150,37 @@
             limpiarFormulario();
 
 
-            document.getElementById("tituloFormulario").innerText =
+            document
+                .getElementById(
+                    "tituloFormulario"
+                )
+                .innerText =
                 "Nuevo insumo";
 
 
-            document.getElementById("botonGuardar").innerText =
+            document
+                .getElementById(
+                    "botonGuardar"
+                )
+                .innerText =
                 "Agregar insumo";
 
 
-            document.getElementById("botonGuardar").onclick =
+            document
+                .getElementById(
+                    "botonGuardar"
+                )
+                .onclick =
                 function () {
                     crearInsumo();
                 };
 
 
-            document.getElementById("botonCancelar").style.display =
+            document
+                .getElementById(
+                    "botonCancelar"
+                )
+                .style.display =
                 "none";
 
         }
@@ -1046,11 +1192,19 @@
 
         function limpiarFormulario() {
 
-            document.getElementById("nombre").value = "";
+            document
+                .getElementById("nombre")
+                .value = "";
 
-            document.getElementById("stock").value = "";
 
-            document.getElementById("costo").value = "";
+            document
+                .getElementById("stock")
+                .value = "";
+
+
+            document
+                .getElementById("costo")
+                .value = "";
 
         }
 
@@ -1062,7 +1216,9 @@
         function mostrarInsumos() {
 
             var lista =
-                document.getElementById("listaInsumos");
+                document.getElementById(
+                    "listaInsumos"
+                );
 
 
             lista.innerHTML = "";
@@ -1082,7 +1238,8 @@
 
             for (var i = 0; i < insumos.length; i++) {
 
-                var insumo = insumos[i];
+                var insumo =
+                    insumos[i];
 
 
                 lista.innerHTML +=
@@ -1102,7 +1259,9 @@
 
                         '<div class="insumo-dato">' +
                             'Costo: $' +
-                            insumo.costo.toLocaleString("es-AR") +
+                            insumo.costo.toLocaleString(
+                                "es-AR"
+                            ) +
                             ' / ' +
                             insumo.unidad +
                         '</div>' +
@@ -1142,16 +1301,21 @@
         function actualizarListaCompras() {
 
             var select =
-                document.getElementById("compraInsumo");
+                document.getElementById(
+                    "compraInsumo"
+                );
 
 
             select.innerHTML =
-                '<option value="">Seleccionar insumo</option>';
+                '<option value="">' +
+                'Seleccionar insumo' +
+                '</option>';
 
 
             for (var i = 0; i < insumos.length; i++) {
 
-                var insumo = insumos[i];
+                var insumo =
+                    insumos[i];
 
 
                 select.innerHTML +=
@@ -1177,17 +1341,24 @@
         function actualizarUnidadesCompra() {
 
             var selectInsumo =
-                document.getElementById("compraInsumo");
+                document.getElementById(
+                    "compraInsumo"
+                );
+
 
             var selectUnidad =
-                document.getElementById("compraUnidad");
+                document.getElementById(
+                    "compraUnidad"
+                );
 
 
             selectUnidad.innerHTML = "";
 
 
             var id =
-                Number(selectInsumo.value);
+                Number(
+                    selectInsumo.value
+                );
 
 
             if (!id) {
@@ -1209,7 +1380,8 @@
 
                 if (insumos[i].id === id) {
 
-                    insumo = insumos[i];
+                    insumo =
+                        insumos[i];
 
                     break;
 
@@ -1228,39 +1400,61 @@
             if (insumo.unidad === "g") {
 
                 selectUnidad.innerHTML =
-                    '<option value="g">Gramos (g)</option>' +
-                    '<option value="kg">Kilogramos (kg)</option>';
+                    '<option value="g">' +
+                    'Gramos (g)' +
+                    '</option>' +
+
+                    '<option value="kg">' +
+                    'Kilogramos (kg)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "kg") {
 
                 selectUnidad.innerHTML =
-                    '<option value="kg">Kilogramos (kg)</option>' +
-                    '<option value="g">Gramos (g)</option>';
+                    '<option value="kg">' +
+                    'Kilogramos (kg)' +
+                    '</option>' +
+
+                    '<option value="g">' +
+                    'Gramos (g)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "ml") {
 
                 selectUnidad.innerHTML =
-                    '<option value="ml">Mililitros (ml)</option>' +
-                    '<option value="litro">Litros (L)</option>';
+                    '<option value="ml">' +
+                    'Mililitros (ml)' +
+                    '</option>' +
+
+                    '<option value="litro">' +
+                    'Litros (L)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "litro") {
 
                 selectUnidad.innerHTML =
-                    '<option value="litro">Litros (L)</option>' +
-                    '<option value="ml">Mililitros (ml)</option>';
+                    '<option value="litro">' +
+                    'Litros (L)' +
+                    '</option>' +
+
+                    '<option value="ml">' +
+                    'Mililitros (ml)' +
+                    '</option>';
 
             }
 
             else {
 
                 selectUnidad.innerHTML =
-                    '<option value="unidad">Unidades</option>';
+                    '<option value="unidad">' +
+                    'Unidades' +
+                    '</option>';
 
             }
 
@@ -1330,44 +1524,75 @@
 
             var id =
                 Number(
-                    document.getElementById("compraInsumo").value
+                    document
+                        .getElementById(
+                            "compraInsumo"
+                        )
+                        .value
                 );
+
 
             var cantidad =
                 Number(
-                    document.getElementById("compraCantidad").value
+                    document
+                        .getElementById(
+                            "compraCantidad"
+                        )
+                        .value
                 );
 
+
             var unidadCompra =
-                document.getElementById("compraUnidad").value;
+                document
+                    .getElementById(
+                        "compraUnidad"
+                    )
+                    .value;
+
 
             var precio =
                 Number(
-                    document.getElementById("compraPrecio").value
+                    document
+                        .getElementById(
+                            "compraPrecio"
+                        )
+                        .value
                 );
 
 
             if (!id) {
 
-                alert("Seleccioná un insumo");
+                alert(
+                    "Seleccioná un insumo"
+                );
 
                 return;
 
             }
 
 
-            if (!cantidad || cantidad <= 0) {
+            if (
+                !cantidad ||
+                cantidad <= 0
+            ) {
 
-                alert("Ingresá una cantidad válida");
+                alert(
+                    "Ingresá una cantidad válida"
+                );
 
                 return;
 
             }
 
 
-            if (!precio || precio <= 0) {
+            if (
+                !precio ||
+                precio <= 0
+            ) {
 
-                alert("Ingresá el precio de la compra");
+                alert(
+                    "Ingresá el precio de la compra"
+                );
 
                 return;
 
@@ -1381,7 +1606,8 @@
 
                 if (insumos[i].id === id) {
 
-                    insumo = insumos[i];
+                    insumo =
+                        insumos[i];
 
                     break;
 
@@ -1392,7 +1618,9 @@
 
             if (!insumo) {
 
-                alert("El insumo no existe");
+                alert(
+                    "El insumo no existe"
+                );
 
                 return;
 
@@ -1408,16 +1636,18 @@
 
 
             /*
-                Por ahora usamos el costo
-                de la última compra.
+                Por ahora usamos
+                el costo de la última compra.
             */
 
             var nuevoCosto =
-                precio / cantidadConvertida;
+                precio /
+                cantidadConvertida;
 
 
             insumo.stock =
-                insumo.stock + cantidadConvertida;
+                insumo.stock +
+                cantidadConvertida;
 
 
             insumo.costo =
@@ -1428,19 +1658,26 @@
 
                 id: Date.now(),
 
-                insumoId: insumo.id,
+                insumoId:
+                    insumo.id,
 
-                insumoNombre: insumo.nombre,
+                insumoNombre:
+                    insumo.nombre,
 
-                cantidad: cantidad,
+                cantidad:
+                    cantidad,
 
-                unidad: unidadCompra,
+                unidad:
+                    unidadCompra,
 
-                cantidadConvertida: cantidadConvertida,
+                cantidadConvertida:
+                    cantidadConvertida,
 
-                unidadInterna: insumo.unidad,
+                unidadInterna:
+                    insumo.unidad,
 
-                precio: precio
+                precio:
+                    precio
 
             };
 
@@ -1448,9 +1685,23 @@
             compras.push(compra);
 
 
-            document.getElementById("compraCantidad").value = "";
+            guardarInsumos();
 
-            document.getElementById("compraPrecio").value = "";
+            guardarCompras();
+
+
+            document
+                .getElementById(
+                    "compraCantidad"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "compraPrecio"
+                )
+                .value = "";
 
 
             mostrarInsumos();
@@ -1469,7 +1720,9 @@
         function mostrarCompras() {
 
             var lista =
-                document.getElementById("listaCompras");
+                document.getElementById(
+                    "listaCompras"
+                );
 
 
             lista.innerHTML = "";
@@ -1489,7 +1742,8 @@
 
             for (var i = 0; i < compras.length; i++) {
 
-                var compra = compras[i];
+                var compra =
+                    compras[i];
 
 
                 lista.innerHTML +=
@@ -1516,7 +1770,9 @@
 
                         '<div class="compra-dato">' +
                             'Precio: $' +
-                            compra.precio.toLocaleString("es-AR") +
+                            compra.precio.toLocaleString(
+                                "es-AR"
+                            ) +
                         '</div>' +
 
                     '</div>';
@@ -1533,7 +1789,9 @@
         function actualizarIngredientesDisponibles() {
 
             var select =
-                document.getElementById("ingredienteInsumo");
+                document.getElementById(
+                    "ingredienteInsumo"
+                );
 
 
             if (!select) {
@@ -1548,12 +1806,15 @@
 
 
             select.innerHTML =
-                '<option value="">Seleccionar insumo</option>';
+                '<option value="">' +
+                'Seleccionar insumo' +
+                '</option>';
 
 
             for (var i = 0; i < insumos.length; i++) {
 
-                var insumo = insumos[i];
+                var insumo =
+                    insumos[i];
 
 
                 select.innerHTML +=
@@ -1569,7 +1830,8 @@
 
             if (valorActual !== "") {
 
-                select.value = valorActual;
+                select.value =
+                    valorActual;
 
             }
 
@@ -1586,17 +1848,24 @@
         function actualizarUnidadesIngrediente() {
 
             var selectInsumo =
-                document.getElementById("ingredienteInsumo");
+                document.getElementById(
+                    "ingredienteInsumo"
+                );
+
 
             var selectUnidad =
-                document.getElementById("ingredienteUnidad");
+                document.getElementById(
+                    "ingredienteUnidad"
+                );
 
 
             selectUnidad.innerHTML = "";
 
 
             var id =
-                Number(selectInsumo.value);
+                Number(
+                    selectInsumo.value
+                );
 
 
             if (!id) {
@@ -1618,7 +1887,8 @@
 
                 if (insumos[i].id === id) {
 
-                    insumo = insumos[i];
+                    insumo =
+                        insumos[i];
 
                     break;
 
@@ -1637,39 +1907,61 @@
             if (insumo.unidad === "g") {
 
                 selectUnidad.innerHTML =
-                    '<option value="g">Gramos (g)</option>' +
-                    '<option value="kg">Kilogramos (kg)</option>';
+                    '<option value="g">' +
+                    'Gramos (g)' +
+                    '</option>' +
+
+                    '<option value="kg">' +
+                    'Kilogramos (kg)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "kg") {
 
                 selectUnidad.innerHTML =
-                    '<option value="kg">Kilogramos (kg)</option>' +
-                    '<option value="g">Gramos (g)</option>';
+                    '<option value="kg">' +
+                    'Kilogramos (kg)' +
+                    '</option>' +
+
+                    '<option value="g">' +
+                    'Gramos (g)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "ml") {
 
                 selectUnidad.innerHTML =
-                    '<option value="ml">Mililitros (ml)</option>' +
-                    '<option value="litro">Litros (L)</option>';
+                    '<option value="ml">' +
+                    'Mililitros (ml)' +
+                    '</option>' +
+
+                    '<option value="litro">' +
+                    'Litros (L)' +
+                    '</option>';
 
             }
 
             else if (insumo.unidad === "litro") {
 
                 selectUnidad.innerHTML =
-                    '<option value="litro">Litros (L)</option>' +
-                    '<option value="ml">Mililitros (ml)</option>';
+                    '<option value="litro">' +
+                    'Litros (L)' +
+                    '</option>' +
+
+                    '<option value="ml">' +
+                    'Mililitros (ml)' +
+                    '</option>';
 
             }
 
             else {
 
                 selectUnidad.innerHTML =
-                    '<option value="unidad">Unidades</option>';
+                    '<option value="unidad">' +
+                    'Unidades' +
+                    '</option>';
 
             }
 
@@ -1684,68 +1976,89 @@
 
             var insumoId =
                 Number(
-                    document.getElementById("ingredienteInsumo").value
+                    document
+                        .getElementById(
+                            "ingredienteInsumo"
+                        )
+                        .value
                 );
+
 
             var cantidad =
                 Number(
-                    document.getElementById("ingredienteCantidad").value
+                    document
+                        .getElementById(
+                            "ingredienteCantidad"
+                        )
+                        .value
                 );
 
+
             var unidad =
-                document.getElementById("ingredienteUnidad").value;
+                document
+                    .getElementById(
+                        "ingredienteUnidad"
+                    )
+                    .value;
 
 
             if (!insumoId) {
 
-                alert("Seleccioná un insumo");
+                alert(
+                    "Seleccioná un insumo"
+                );
 
                 return;
 
             }
 
 
-            if (!cantidad || cantidad <= 0) {
+            if (
+                !cantidad ||
+                cantidad <= 0
+            ) {
 
-                alert("Ingresá una cantidad válida");
+                alert(
+                    "Ingresá una cantidad válida"
+                );
 
                 return;
 
             }
 
 
-            var insumo = null;
-
-
-            for (var i = 0; i < insumos.length; i++) {
-
-                if (insumos[i].id === insumoId) {
-
-                    insumo = insumos[i];
-
-                    break;
-
-                }
-
-            }
+            var insumo =
+                obtenerInsumo(
+                    insumoId
+                );
 
 
             if (!insumo) {
 
-                alert("El insumo no existe");
+                alert(
+                    "El insumo no existe"
+                );
 
                 return;
 
             }
 
 
-            for (var i = 0; i < ingredientesReceta.length; i++) {
+            for (
+                var i = 0;
+                i < ingredientesReceta.length;
+                i++
+            ) {
 
                 if (
-                    ingredientesReceta[i].insumoId === insumoId
+                    ingredientesReceta[i]
+                        .insumoId ===
+                    insumoId
                 ) {
 
-                    alert("Ese insumo ya está en la receta");
+                    alert(
+                        "Ese insumo ya está en la receta"
+                    );
 
                     return;
 
@@ -1756,16 +2069,23 @@
 
             ingredientesReceta.push({
 
-                insumoId: insumoId,
+                insumoId:
+                    insumoId,
 
-                cantidad: cantidad,
+                cantidad:
+                    cantidad,
 
-                unidad: unidad
+                unidad:
+                    unidad
 
             });
 
 
-            document.getElementById("ingredienteCantidad").value = "";
+            document
+                .getElementById(
+                    "ingredienteCantidad"
+                )
+                .value = "";
 
 
             mostrarIngredientesReceta();
@@ -1779,7 +2099,11 @@
 
         function eliminarIngrediente(indice) {
 
-            ingredientesReceta.splice(indice, 1);
+            ingredientesReceta.splice(
+                indice,
+                1
+            );
+
 
             mostrarIngredientesReceta();
 
@@ -1826,7 +2150,9 @@
 
 
                 var insumo =
-                    obtenerInsumo(ingrediente.insumoId);
+                    obtenerInsumo(
+                        ingrediente.insumoId
+                    );
 
 
                 if (!insumo) {
@@ -1872,7 +2198,9 @@
             lista.innerHTML = "";
 
 
-            if (ingredientesReceta.length === 0) {
+            if (
+                ingredientesReceta.length === 0
+            ) {
 
                 lista.innerHTML =
                     '<div class="vacio">' +
@@ -1887,7 +2215,11 @@
             }
 
 
-            for (var i = 0; i < ingredientesReceta.length; i++) {
+            for (
+                var i = 0;
+                i < ingredientesReceta.length;
+                i++
+            ) {
 
                 var ingrediente =
                     ingredientesReceta[i];
@@ -1969,27 +2301,34 @@
 
                     '<div class="receta-dato">' +
                         '<strong>Costo total:</strong> $' +
-                        costo.toLocaleString("es-AR", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        }) +
+                        costo.toLocaleString(
+                            "es-AR",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) +
                     '</div>';
 
 
             if (rendimiento > 0) {
 
                 var costoUnitario =
-                    costo / rendimiento;
+                    costo /
+                    rendimiento;
 
 
                 texto +=
 
                     '<div class="receta-dato">' +
                         '<strong>Costo por unidad:</strong> $' +
-                        costoUnitario.toLocaleString("es-AR", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        }) +
+                        costoUnitario.toLocaleString(
+                            "es-AR",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) +
                     '</div>';
 
             }
@@ -1999,7 +2338,8 @@
                 '</div>';
 
 
-            contenedor.innerHTML = texto;
+            contenedor.innerHTML =
+                texto;
 
         }
 
@@ -2011,40 +2351,56 @@
         function crearReceta() {
 
             var nombre =
-                document.getElementById(
-                    "nombreReceta"
-                ).value.trim();
+                document
+                    .getElementById(
+                        "nombreReceta"
+                    )
+                    .value
+                    .trim();
 
 
             var rendimiento =
                 Number(
-                    document.getElementById(
-                        "rendimientoReceta"
-                    ).value
+                    document
+                        .getElementById(
+                            "rendimientoReceta"
+                        )
+                        .value
                 );
 
 
             if (nombre === "") {
 
-                alert("Ingresá un nombre para la receta");
+                alert(
+                    "Ingresá un nombre para la receta"
+                );
 
                 return;
 
             }
 
 
-            if (!rendimiento || rendimiento <= 0) {
+            if (
+                !rendimiento ||
+                rendimiento <= 0
+            ) {
 
-                alert("Ingresá un rendimiento válido");
+                alert(
+                    "Ingresá un rendimiento válido"
+                );
 
                 return;
 
             }
 
 
-            if (ingredientesReceta.length === 0) {
+            if (
+                ingredientesReceta.length === 0
+            ) {
 
-                alert("Agregá al menos un ingrediente");
+                alert(
+                    "Agregá al menos un ingrediente"
+                );
 
                 return;
 
@@ -2055,9 +2411,11 @@
 
                 id: Date.now(),
 
-                nombre: nombre,
+                nombre:
+                    nombre,
 
-                rendimiento: rendimiento,
+                rendimiento:
+                    rendimiento,
 
                 ingredientes:
                     copiarIngredientes(
@@ -2067,7 +2425,12 @@
             };
 
 
-            recetas.push(receta);
+            recetas.push(
+                receta
+            );
+
+
+            guardarRecetas();
 
 
             cancelarEdicionReceta();
@@ -2125,15 +2488,19 @@
                         recetas[i];
 
 
-                    document.getElementById(
-                        "nombreReceta"
-                    ).value =
+                    document
+                        .getElementById(
+                            "nombreReceta"
+                        )
+                        .value =
                         receta.nombre;
 
 
-                    document.getElementById(
-                        "rendimientoReceta"
-                    ).value =
+                    document
+                        .getElementById(
+                            "rendimientoReceta"
+                        )
+                        .value =
                         receta.rendimiento;
 
 
@@ -2147,29 +2514,37 @@
                         id;
 
 
-                    document.getElementById(
-                        "tituloFormularioReceta"
-                    ).innerText =
+                    document
+                        .getElementById(
+                            "tituloFormularioReceta"
+                        )
+                        .innerText =
                         "Modificar receta";
 
 
-                    document.getElementById(
-                        "botonGuardarReceta"
-                    ).innerText =
+                    document
+                        .getElementById(
+                            "botonGuardarReceta"
+                        )
+                        .innerText =
                         "Guardar cambios";
 
 
-                    document.getElementById(
-                        "botonGuardarReceta"
-                    ).onclick =
+                    document
+                        .getElementById(
+                            "botonGuardarReceta"
+                        )
+                        .onclick =
                         function () {
                             guardarCambiosReceta();
                         };
 
 
-                    document.getElementById(
-                        "botonCancelarReceta"
-                    ).style.display =
+                    document
+                        .getElementById(
+                            "botonCancelarReceta"
+                        )
+                        .style.display =
                         "block";
 
 
@@ -2192,40 +2567,56 @@
         function guardarCambiosReceta() {
 
             var nombre =
-                document.getElementById(
-                    "nombreReceta"
-                ).value.trim();
+                document
+                    .getElementById(
+                        "nombreReceta"
+                    )
+                    .value
+                    .trim();
 
 
             var rendimiento =
                 Number(
-                    document.getElementById(
-                        "rendimientoReceta"
-                    ).value
+                    document
+                        .getElementById(
+                            "rendimientoReceta"
+                        )
+                        .value
                 );
 
 
             if (nombre === "") {
 
-                alert("Ingresá un nombre para la receta");
+                alert(
+                    "Ingresá un nombre para la receta"
+                );
 
                 return;
 
             }
 
 
-            if (!rendimiento || rendimiento <= 0) {
+            if (
+                !rendimiento ||
+                rendimiento <= 0
+            ) {
 
-                alert("Ingresá un rendimiento válido");
+                alert(
+                    "Ingresá un rendimiento válido"
+                );
 
                 return;
 
             }
 
 
-            if (ingredientesReceta.length === 0) {
+            if (
+                ingredientesReceta.length === 0
+            ) {
 
-                alert("Agregá al menos un ingrediente");
+                alert(
+                    "Agregá al menos un ingrediente"
+                );
 
                 return;
 
@@ -2234,7 +2625,10 @@
 
             for (var i = 0; i < recetas.length; i++) {
 
-                if (recetas[i].id === recetaEditando) {
+                if (
+                    recetas[i].id ===
+                    recetaEditando
+                ) {
 
                     recetas[i].nombre =
                         nombre;
@@ -2254,6 +2648,9 @@
             }
 
 
+            guardarRecetas();
+
+
             cancelarEdicionReceta();
 
             mostrarRecetas();
@@ -2267,44 +2664,59 @@
 
         function cancelarEdicionReceta() {
 
-            recetaEditando = null;
-
-            ingredientesReceta = [];
-
-
-            document.getElementById(
-                "nombreReceta"
-            ).value = "";
+            recetaEditando =
+                null;
 
 
-            document.getElementById(
-                "rendimientoReceta"
-            ).value = "";
+            ingredientesReceta =
+                [];
 
 
-            document.getElementById(
-                "tituloFormularioReceta"
-            ).innerText =
+            document
+                .getElementById(
+                    "nombreReceta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "rendimientoReceta"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "tituloFormularioReceta"
+                )
+                .innerText =
                 "Nueva receta";
 
 
-            document.getElementById(
-                "botonGuardarReceta"
-            ).innerText =
+            document
+                .getElementById(
+                    "botonGuardarReceta"
+                )
+                .innerText =
                 "Crear receta";
 
 
-            document.getElementById(
-                "botonGuardarReceta"
-            ).onclick =
+            document
+                .getElementById(
+                    "botonGuardarReceta"
+                )
+                .onclick =
                 function () {
                     crearReceta();
                 };
 
 
-            document.getElementById(
-                "botonCancelarReceta"
-            ).style.display =
+            document
+                .getElementById(
+                    "botonCancelarReceta"
+                )
+                .style.display =
                 "none";
 
 
@@ -2320,7 +2732,9 @@
         function eliminarReceta(id) {
 
             var confirmar =
-                confirm("¿Querés eliminar esta receta?");
+                confirm(
+                    "¿Querés eliminar esta receta?"
+                );
 
 
             if (!confirmar) {
@@ -2334,13 +2748,19 @@
 
                 if (recetas[i].id === id) {
 
-                    recetas.splice(i, 1);
+                    recetas.splice(
+                        i,
+                        1
+                    );
 
                     break;
 
                 }
 
             }
+
+
+            guardarRecetas();
 
 
             mostrarRecetas();
@@ -2459,18 +2879,24 @@
 
                             '<div class="receta-dato">' +
                                 '<strong>Costo total:</strong> $' +
-                                costoTotal.toLocaleString("es-AR", {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }) +
+                                costoTotal.toLocaleString(
+                                    "es-AR",
+                                    {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    }
+                                ) +
                             '</div>' +
 
                             '<div class="receta-dato">' +
                                 '<strong>Costo por unidad:</strong> $' +
-                                costoUnitario.toLocaleString("es-AR", {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }) +
+                                costoUnitario.toLocaleString(
+                                    "es-AR",
+                                    {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    }
+                                ) +
                             '</div>' +
 
                         '</div>' +
@@ -2508,7 +2934,9 @@
         ========================= */
 
         document
-            .getElementById("rendimientoReceta")
+            .getElementById(
+                "rendimientoReceta"
+            )
             .addEventListener(
                 "input",
                 function () {
@@ -2522,6 +2950,8 @@
         /* =========================
            INICIALIZAR
         ========================= */
+
+        mostrarInsumos();
 
         actualizarListaCompras();
 
